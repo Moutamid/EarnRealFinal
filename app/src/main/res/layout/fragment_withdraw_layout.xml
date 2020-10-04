@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Please fill the form correctly"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="BALANCE:"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="360"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/current_balance_textView_withdraw"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/darkBlue"/>
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:id="@+id/radioGroup_withdraw_layout"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="20dp"
+            android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/easypaisa_radioBtn_withdraw_layout"
+                    android:textSize="18sp"
+                    android:checked="true"
+                    android:buttonTint="@color/orange"
+                    android:text="Easypaisa"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp"
+                    android:id="@+id/jazzcash_radioBtn_withdraw_layout"
+                    android:buttonTint="@color/orange"
+                    android:layout_height="wrap_content"
+                    android:text="Jazzcash"/>
+
+
+        </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/icon_email" />
+
+        <EditText
+            android:layout_width="187dp"
+            android:layout_height="35dp"
+            android:id="@+id/accountName_et_withdraw_layout"
+            android:layout_marginEnd="5dp"
+            android:background="@color/white"
+            android:hint="Account name"
+            android:inputType="textPersonName"
+            android:textColor="@color/darkBlue"
+            android:layout_marginStart="5dp"
+            android:textColorHint="@color/greyishblue"
+            android:textSize="13sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="250dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_background"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_phone_number" />
+
+        <EditText
+
+            android:layout_width="187dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/white"
+            android:id="@+id/accountNmbr_et_withdraw_layout"
+            android:hint="Account number"
+            android:inputType="number"
+            android:textColor="@color/darkBlue"
+            android:layout_marginStart="5dp"
+            android:textColorHint="@color/greyishblue"
+            android:textSize="13sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_background"
+        android:padding="5dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_phone_number" />
+
+        <EditText
+
+            android:layout_width="187dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="5dp"
+            android:id="@+id/amount_et_withdraw_layout"
+            android:background="@color/white"
+            android:hint="Amount"
+            android:inputType="number"
+            android:textColor="@color/darkBlue"
+            android:layout_marginStart="5dp"
+            android:textColorHint="@color/greyishblue"
+            android:textSize="13sp"
+            />
+
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/red"
+            android:text="5% transaction fees will be deducted."/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/greyishblue"
+            android:text="Note: Your request will be processed in between 12 to 24 business hours."/>
+
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_btn_upgrade_layout"
+            android:background="@drawable/submit_btn_background"
+            android:text="Submit"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</ScrollView>

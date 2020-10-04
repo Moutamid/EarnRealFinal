@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard_id"
+            android:icon="@drawable/ic_dashboard"
+            android:title="Dashboard" />
+<!--        <item-->
+<!--            android:id="@+id/nav_upgrade_id"-->
+<!--            android:icon="@drawable/ic_upgrade"-->
+<!--            android:title="Upgrade" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_premium_ads_id"-->
+<!--            android:icon="@drawable/ic_premium_ads"-->
+<!--            android:title="Premium Ads" />-->
+        <item
+            android:id="@+id/nav_daily_ads_id"
+            android:icon="@drawable/ic_daily_ads"
+            android:title="Daily Ads" />
+        <item
+            android:id="@+id/nav_team_id"
+            android:title="Team"
+            android:icon="@drawable/ic_team" />
+        <item
+            android:id="@+id/nav_withdraw_id"
+            android:title="Withdraw"
+            android:icon="@drawable/ic_withdraw" />
+    </group>
+
+    <item android:title="Miscellaneous">
+        <menu>
+            <group android:checkableBehavior="single">
+<!--            <item-->
+<!--                android:id="@+id/nav_payment_proof_id"-->
+<!--                android:icon="@drawable/ic_payment_proof"-->
+<!--                android:title="Payment proof" />-->
+            <item
+                android:id="@+id/nav_privacy_policy_id"
+                android:icon="@drawable/ic_privacy_policy"
+                android:title="Privacy policy" />
+            <item
+                android:id="@+id/nav_terms_of_services_id"
+                android:icon="@drawable/ic_terms_of_services"
+                android:title="Terms of services" />
+            <item
+                android:id="@+id/nav_contact_us_id"
+                android:title="Contact us"
+                android:icon="@drawable/ic_contact" />
+<!--            <item-->
+<!--                android:id="@+id/nav_help_id"-->
+<!--                android:title="Help"-->
+<!--                android:icon="@drawable/ic_help" />-->
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/nav_logout_id"
+                android:title="Logout"
+                android:icon="@drawable/ic_logout" />
+        </menu>
+    </item>
+
+</menu>

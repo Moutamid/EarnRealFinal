@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+<!--    PAID METHOD LAYOUT-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/paid_layout_fragment_upgrade"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_done"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Congratulations!"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/darkBlue"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:id="@+id/paid_expire_date_fragment_upgrade"
+            android:textSize="18sp"
+            android:text="Description"/>
+
+    </LinearLayout>
+
+<!--    METHOD SELECTION LAYOUT-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:id="@+id/method_selection_layout_upgrade"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Select a method"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Select a method to transfer the amount safely and you're good to go. It's that simple."
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/payment_methods_radioGroup_upgrade_layout"
+                android:layout_width="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/easypaisa_radioBtn_upgrade_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:checked="true"
+                    android:buttonTint="@color/orange"
+                    android:text="Easypaisa"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/jazzcash_radioBtn_upgrade_layout"
+                    android:textSize="18sp"
+                    android:buttonTint="@color/orange"
+                    android:layout_height="wrap_content"
+                    android:text="Jazzcash"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="250dp"
+            android:id="@+id/nextBtn_upgrade_layout"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submit_btn_background"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="15sp"
+            android:layout_height="wrap_content"
+            android:text="More methods are coming soon..."
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+<!--    EASYPAISA INSTRUCTIONS LAYOUT-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:id="@+id/easypaisa_instructions_layout_upgrade"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="50dp"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Easypaisa"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Attention please!"
+            android:textColor="@color/red"
+            android:textSize="20sp" />
+
+<!--                    android:text="Please send PKR 500 and so on package dev.moutamid.earnreal;import android.os.Bundle;import android.view.LayoutInflater;import android.view.View;import android.view.ViewGroup;imort androidx.annotation.NonNull;imort androidx.annotation.Nullable;imort androidx.fragment.app.Fragment;pulic class FragmentUpgrade extends Fragment {   @Nullable   @Override   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {       return inflater.inflate(R.layout.fragment_upgrade_layout, container, false);   }}Please send PKR 500 and so on package dev.moutamid.earnreal;import android.os.Bundle;import android.view.LayoutInflater;import android.view.View;import android.view.ViewGroup;imort androidx.annotation.NonNull;imort androidx.annotation.Nullable;imort androidx.fragment.app.Fragment;pulic class FragmentUpgrade extends Fragment {   @Nullable   @Override   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {       return inflater.inflate(R.layout.fragment_upgrade_layout, container, false);   }}"-->
+        <TextView
+            android:text="SOME TEXT HERE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="TID"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_phone_number" />
+
+            <EditText
+                android:layout_width="187dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:hint="Enter the TID code here"
+                android:inputType="number"
+                android:textColor="@color/darkBlue"
+                android:id="@+id/easypaisa_edittext_layout_upgrade"
+                android:textColorHint="@color/greyishblue"
+                android:textSize="13sp"
+                android:background="@color/white" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:id="@+id/easypaisa_submitBtn_layout_upgrade"
+            android:background="@drawable/submit_btn_background"
+            android:text="Verify"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+    <!--    JAZZCASH INSTRUCTIONS LAYOUT-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:id="@+id/jazzcash_instructions_layout_upgrade"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingBottom="50dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Jazzcash"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Attention please!"
+                android:textColor="@color/red"
+                android:textSize="20sp" />
+
+<!--            android:text="Please send PKR 500 and so on package dev.moutamid.earnreal;import android.os.Bundle;import android.view.LayoutInflater;import android.view.View;import android.view.ViewGroup;imort androidx.annotation.NonNull;imort androidx.annotation.Nullable;imort androidx.fragment.app.Fragment;pulic class FragmentUpgrade extends Fragment {   @Nullable   @Override   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {       return inflater.inflate(R.layout.fragment_upgrade_layout, container, false);   }}Please send PKR 500 and so on package dev.moutamid.earnreal;import android.os.Bundle;import android.view.LayoutInflater;import android.view.View;import android.view.ViewGroup;imort androidx.annotation.NonNull;imort androidx.annotation.Nullable;imort androidx.fragment.app.Fragment;pulic class FragmentUpgrade extends Fragment {   @Nullable   @Override   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {       return inflater.inflate(R.layout.fragment_upgrade_layout, container, false);   }}"-->
+            <TextView
+                android:text="SOME TEXT HERE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="TID"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_phone_number" />
+
+                <EditText
+                    android:layout_width="187dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/jazzcash_edittext_layout_upgrade"
+                    android:layout_marginStart="5dp"
+                    android:hint="Enter the TID code here"
+                    android:inputType="number"
+                    android:textColor="@color/darkBlue"
+                    android:textColorHint="@color/greyishblue"
+                    android:textSize="13sp"
+                    android:background="@color/white" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:id="@+id/jazzcash_submitBtn_layout_upgrade"
+                android:background="@drawable/submit_btn_background"
+                android:text="Verify"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

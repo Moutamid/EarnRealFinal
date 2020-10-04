@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/darkBlue"
+                android:text="AVAILABLE ADS: "
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:id="@+id/daily_ads_textView_fragment_daily_ads"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/orange"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="You need to be a paid member to watch daily ads. You will get 20 ads daily on becoming a premium member and you will get 15 premium ads by referring a paid member and every ad will give you Rs: 5"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:id="@+id/not_paid_textView_fragment_daily_ads"
+            android:textColor="@color/orange"/>
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submit_btn_background"
+            android:text="Verify"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:id="@+id/verify_btn_fragment_daily_ads"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/submit_btn_background"
+        android:text="Show advertisement"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:id="@+id/show_ad_btn_fragment_daily_ads"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "501659348423",
+    "firebase_url": "https://earnreal-d8912.firebaseio.com",
+    "project_id": "earnreal-d8912",
+    "storage_bucket": "earnreal-d8912.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501659348423:android:50a0ad514aaba4e226fde2",
+        "android_client_info": {
+          "package_name": "dev.moutamid.earnreal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501659348423-cnafnnutaut5o4f4rslprofpiffrs19b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.moutamid.earnreal",
+            "certificate_hash": "efe5cbd1dd97785aa46e320d94d69d5bcd5909b0"
+          }
+        },
+        {
+          "client_id": "501659348423-n51db8jqvadqqgoo4sh20i09l2uq48le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3JR3A4bwTpLNdSC6KAWB65wMV1kkueNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501659348423-n51db8jqvadqqgoo4sh20i09l2uq48le.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
