@@ -141,12 +141,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                toolbar.setTitle("EarnReal - Premium Ads");
 //                closeDrawer();
 //                break;
-            case R.id.nav_daily_ads_id:
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentDailyAds())
-                        .commit();
-                toolbar.setTitle("EarnReal - Daily Ads");
-                closeDrawer();
-                break;
+//            case R.id.nav_daily_ads_id:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentDailyAds())
+//                        .commit();
+//                toolbar.setTitle("EarnReal - Daily Ads");
+//                closeDrawer();
+//                break;
             case R.id.nav_team_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentTeam())
                         .commit();
