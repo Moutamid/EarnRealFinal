@@ -150,7 +150,7 @@ public class Utils {
 
     }
 
-    public String getNextDate(Context context){
+    public String getNextDate(Context context) {
 
         try {
             Date date = SecureTimer.with(context).getCurrentDate();
@@ -160,6 +160,23 @@ public class Utils {
 
             c.setTime(sdf.parse(sdf.format(date)));
             c.add(Calendar.DATE, 1);
+            return sdf.format(c.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
+
+    public String getPreviousDate(Context context) {
+
+        try {
+            Date date = SecureTimer.with(context).getCurrentDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+            Calendar c = Calendar.getInstance();
+
+            c.setTime(sdf.parse(sdf.format(date)));
+            c.add(Calendar.DATE, -1);
             return sdf.format(c.getTime());
         } catch (ParseException e) {
             e.printStackTrace();

@@ -8,14 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -38,7 +41,7 @@ public class FragmentTeam extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_team_layout, container, false);
+        final View view = inflater.inflate(R.layout.fragment_team_layout, container, false);
 
 
         //
@@ -63,12 +66,11 @@ public class FragmentTeam extends Fragment {
 //            getTeamFromDatabase(view);
 
 //            TextView userIdTxt = view.findViewById(R.id.user_id_textView);
-  //          userIdTxt.setText(utils.getStoredString(getActivity(), USER_ID));
+        //          userIdTxt.setText(utils.getStoredString(getActivity(), USER_ID));
 
-    //        view.findViewById(R.id.copy_btn_user_id).setOnClickListener(new View.OnClickListener() {
-            //    @Override
-          //      public void onClick(View view) {
-
+        //        view.findViewById(R.id.copy_btn_user_id).setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //      public void onClick(View view) {
 
 
 //                    ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -76,18 +78,29 @@ public class FragmentTeam extends Fragment {
 //                    clipboardManager.setPrimaryClip(clipData);
 //
 //                    utils.showWorkDoneDialog(getActivity(), "Copied!", "Your referral ID has been copied to clipboard. Now tell others to sign up using your ID and after they upgrade their account, you'll get 15 premium ads and every ad will give you Rs: 5");
-      //          }
+        //          }
         //    });
 
 //        }
 
+        ViewPager viewPager = view.findViewById(R.id.view_pager_fragment_team);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
 
-        Toast.makeText(getActivity(), utils.getDate(getActivity()), Toast.LENGTH_LONG).show();
-        view.findViewById(R.id.www).setOnClickListener(new View.OnClickListener() {
+        TabLayout tabLayout = view.findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
+
+        //Toast.makeText(getActivity(), utils.getDate(getActivity()), Toast.LENGTH_LONG).show();
+
+
+        TextView dateTextView = view.findViewById(R.id.current_date_textview);
+        dateTextView.setText("Yesterday, (" + utils.getPreviousDate(getActivity()) + ")");
+
+        view.findViewById(R.id.date_picker_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                showDatePickerDialog();
+                showDatePickerDialog(view);
 
             }
         });
@@ -95,20 +108,72 @@ public class FragmentTeam extends Fragment {
         return view;
     }
 
-    private void showDatePickerDialog() {
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        public ViewPagerAdapter(@NonNull FragmentManager fm) {
+            super(fm);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position) {
+                case 0:
+                    return new FragmentPendingReferrals();
+                case 1:
+                    return new FragmentApprovedReferrals();
+            }
+
+            return new FragmentPendingReferrals();
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Pending Referrals";
+                case 1:
+                    return "Approved Referrals";
+                default:
+                    return null;
+            }
+        }
+    }
+
+    private void showDatePickerDialog(View view) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        DialogFragment dialogFragment = new DatePickerFragment();
+        DialogFragment dialogFragment = new DatePickerFragment(view);
         dialogFragment.show(fragmentManager, "datePicker");
     }
 
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        Utils utils = new Utils();
+        View parentView;
+
+        public DatePickerFragment(View v) {
+            parentView = v;
+        }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
             //return super.onCreateDialog(savedInstanceState);
 
-            return new DatePickerDialog(getActivity(), this, 2020, 10-1, 5);
+            String currentDate = utils.getDate(getActivity());// 06-10-2020
+
+            int date = Integer.parseInt(currentDate.substring(0, 2));
+            int month = Integer.parseInt(currentDate.substring(3, 5));
+            int year = Integer.parseInt(currentDate.substring(6));
+
+            return new DatePickerDialog(getActivity(), this, year, month - 1, date);
 
         }
 
@@ -119,13 +184,15 @@ public class FragmentTeam extends Fragment {
             String m = String.valueOf(month + 1);
             String d = String.valueOf(dayOfMonth);
 
-            if (month+1 < 10)
+            if (month + 1 < 10)
                 m = "0" + m;
 
             if (dayOfMonth < 10)
                 d = "0" + d;
 
-            Toast.makeText(getActivity(), d+"-"+m+"-"+y, Toast.LENGTH_SHORT).show();
+            TextView dateTextView = parentView.findViewById(R.id.current_date_textview);
+
+            dateTextView.setText(d + "-" + m + "-" + y);
 
         }
     }
