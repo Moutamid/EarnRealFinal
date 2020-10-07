@@ -41,12 +41,12 @@
                 android:layout_marginLeft="10dp" />
 
             <EditText
-                android:id="@+id/email_login_editText"
+                android:id="@+id/number_login_editText"
                 android:layout_width="187dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="5dp"
-                android:hint="Email"
-                android:inputType="textPersonName"
+                android:hint="Number"
+                android:inputType="number"
                 android:textColor="@color/darkBlue"
                 android:textColorHint="@color/greyishblue"
                 android:layout_marginStart="5dp"

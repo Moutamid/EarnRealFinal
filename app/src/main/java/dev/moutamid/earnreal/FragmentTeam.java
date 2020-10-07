@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -102,6 +103,13 @@ public class FragmentTeam extends Fragment {
 
                 showDatePickerDialog(view);
 
+            }
+        });
+
+        view.findViewById(R.id.add_referral_detail_btn_fragment_team).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Clicked!", Toast.LENGTH_SHORT).show();
             }
         });
 

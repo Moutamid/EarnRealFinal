@@ -121,6 +121,7 @@ public class ActivityLogin extends AppCompatActivity {
         Log.i(TAG, "checkStatusOfEditTexts: ");
 
         String emailStr = emailEditText.getText().toString().trim();
+
         String passwordStr = passwordEditText.getText().toString().trim();
 
         if (!isOnline) {
@@ -135,6 +136,8 @@ public class ActivityLogin extends AppCompatActivity {
             emailEditText.requestFocus();
             return;
         }
+        // ADDING EMAIL FORMAT AT THE END
+        emailStr+="@earnreal.com";
 
         if (TextUtils.isEmpty(passwordStr)) {
             mLoadingDialog.dismiss();
@@ -195,7 +198,7 @@ public class ActivityLogin extends AppCompatActivity {
     private void initDeclareViews() {
         Log.i(TAG, "initViews: ");
 
-        emailEditText = findViewById(R.id.email_login_editText);
+        emailEditText = findViewById(R.id.number_login_editText);
         passwordEditText = findViewById(R.id.password_login_editText);
         Button loginBtn = findViewById(R.id.login_btn);
 

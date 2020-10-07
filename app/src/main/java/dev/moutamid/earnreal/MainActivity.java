@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String email = utils.getStoredString(MainActivity.this, USER_EMAIL);
         //String number = utils.getStoredString(MainActivity.this, USER_NUMBER);
 
-        nav_email.setText(email);
+        nav_email.setText(email.substring(0, 11));
         //nav_phone_number.setText(number);
 
     }

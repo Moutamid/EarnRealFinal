@@ -15,10 +15,10 @@
 <!--            android:id="@+id/nav_premium_ads_id"-->
 <!--            android:icon="@drawable/ic_premium_ads"-->
 <!--            android:title="Premium Ads" />-->
-        <item
-            android:id="@+id/nav_daily_ads_id"
-            android:icon="@drawable/ic_daily_ads"
-            android:title="Daily Ads" />
+<!--        <item-->
+<!--            android:id="@+id/nav_daily_ads_id"-->
+<!--            android:icon="@drawable/ic_daily_ads"-->
+<!--            android:title="Daily Ads" />-->
         <item
             android:id="@+id/nav_team_id"
             android:title="Team"

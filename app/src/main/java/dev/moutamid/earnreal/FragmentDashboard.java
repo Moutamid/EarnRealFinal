@@ -98,9 +98,7 @@ public class FragmentDashboard extends Fragment {
     }
 
     private void checkBoolean() {
-        if (
-                isDone_getDetailsFromDatabase
-                        && isDone_getTotalReferralsFromDatabase) {
+        if (isDone_getDetailsFromDatabase && isDone_getTotalReferralsFromDatabase) {
 
             handler.removeCallbacks(booleanCheckerRunnable);
             dialog.dismiss();
