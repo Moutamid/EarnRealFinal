@@ -224,7 +224,7 @@ public class FragmentDashboard extends Fragment {
 
                 if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
 
-                    accountDetails accountDetails = snapshot.child(mAuth.getCurrentUser().getUid()).getValue(accountDetails.class);
+                    AccountDetails accountDetails = snapshot.child(mAuth.getCurrentUser().getUid()).getValue(AccountDetails.class);
                     setValuesToTextViews(accountDetails.getTotal_balance(), accountDetails.getTotal_withdraw(), accountDetails.getCurrent_balance(), accountDetails.getAccount_status());
 
                 }
@@ -245,38 +245,14 @@ public class FragmentDashboard extends Fragment {
 
     private void getReferralsAmount() {
 
-        totalReferralsSubmitted_tv.setText(String.valueOf(utils.getStoredInteger(getActivity(), TOTAL_REFERRALS_AMOUNT)));
-        paidReferrals_tv.setText(String.valueOf(utils.getStoredInteger(getActivity(), PAID_REFERRALS_AMOUNT)));
+        totalReferralsSubmitted_tv.setText(utils.getStoredString(getActivity(), TOTAL_REFERRALS_AMOUNT));
+        paidReferrals_tv.setText(utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT));
 
         isDone_getTotalReferralsFromDatabase = true;
 
 //        databaseReference.child("referrals").addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-//                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
-//
-//                    if (snapshot.child(mAuth.getCurrentUser().getUid()).hasChild("total_referrals_amount")) {
-//
-//                        String totalReferralsStr = snapshot.child(mAuth.getCurrentUser().getUid())
-//                                .child("total_referrals_amount").getValue(String.class);
-//                        totalReferralsSubmitted_tv.setText(totalReferralsStr);
-//
-//                    }
-//
-//                    if (snapshot.child(mAuth.getCurrentUser().getUid()).hasChild("paid_referrals_amount")) {
-//
-//                        String paidReferralsStr = snapshot.child(mAuth.getCurrentUser().getUid())
-//                                .child("paid_referrals_amount").getValue(String.class);
-//                        paidReferrals_tv.setText(paidReferralsStr);
-//
-//                    }
-//
-//                }else {
-//                    totalReferralsSubmitted_tv.setText("0");
-//                    paidReferrals_tv.setText("0");
-//                }
 
 
 //                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
@@ -344,11 +320,11 @@ public class FragmentDashboard extends Fragment {
 
     }
 
-    private static class accountDetails {
+    private static class AccountDetails {
 
         private String total_balance, current_balance, total_withdraw, account_status;
 
-        public accountDetails(String total_balance, String current_balance, String total_withdraw, String account_status) {
+        public AccountDetails(String total_balance, String current_balance, String total_withdraw, String account_status) {
             this.total_balance = total_balance;
             this.current_balance = current_balance;
             this.total_withdraw = total_withdraw;
@@ -387,7 +363,7 @@ public class FragmentDashboard extends Fragment {
             this.account_status = account_status;
         }
 
-        accountDetails() {
+        AccountDetails() {
         }
     }
 

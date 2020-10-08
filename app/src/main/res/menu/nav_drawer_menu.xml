@@ -20,12 +20,12 @@
 <!--            android:icon="@drawable/ic_daily_ads"-->
 <!--            android:title="Daily Ads" />-->
         <item
-            android:id="@+id/nav_team_id"
-            android:title="Team"
+            android:id="@+id/nav_referrals_id"
+            android:title="Referrals"
             android:icon="@drawable/ic_team" />
         <item
             android:id="@+id/nav_withdraw_id"
-            android:title="Withdraw"
+            android:title="Withdraw details"
             android:icon="@drawable/ic_withdraw" />
     </group>
 
