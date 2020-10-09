@@ -3,7 +3,6 @@ package dev.moutamid.earnreal;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -110,8 +109,10 @@ public class FragmentReferrals extends Fragment {
 
 //        }
 
+        utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getPreviousDate(getActivity()));
+
         ViewPager viewPager = view.findViewById(R.id.view_pager_fragment_team);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
@@ -124,7 +125,7 @@ public class FragmentReferrals extends Fragment {
             @Override
             public void onClick(View v) {
 
-                showDatePickerDialog(view);
+                showDatePickerDialog(view, viewPagerAdapter);
 
             }
         });
@@ -275,7 +276,7 @@ public class FragmentReferrals extends Fragment {
                 if (task.isSuccessful()) {
                     dialog1.dismiss();
                     referralDialog.dismiss();
-                    Toast.makeText(getActivity(), "DONE", Toast.LENGTH_SHORT).show();
+                    utils.showWorkDoneDialog(getActivity(), "Detail uploaded!", "Your referral detail is successfully submitted and you wil get a response feedback in approx 28 hours.");
                 } else {
                     dialog1.dismiss();
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -433,9 +434,9 @@ public class FragmentReferrals extends Fragment {
         }
     }
 
-    private void showDatePickerDialog(View view) {
+    private void showDatePickerDialog(View view, ViewPagerAdapter viewAdapter) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        DialogFragment dialogFragment = new DatePickerFragment(view);
+        DialogFragment dialogFragment = new DatePickerFragment(view, viewAdapter);
         dialogFragment.show(fragmentManager, "datePicker");
     }
 
@@ -444,9 +445,11 @@ public class FragmentReferrals extends Fragment {
         private static final String CURRENT_DATE_STRING = "current_date_string";
         Utils utils = new Utils();
         View parentView;
+        ViewPagerAdapter pagerAdapter;
 
-        public DatePickerFragment(View v) {
+        public DatePickerFragment(View v, ViewPagerAdapter adapter) {
             parentView = v;
+            pagerAdapter = adapter;
         }
 
         @NonNull
@@ -479,16 +482,24 @@ public class FragmentReferrals extends Fragment {
 
             TextView dateTextView = parentView.findViewById(R.id.current_date_textview);
 
-            dateTextView.setText(d + "-" + m + "-" + y);
-
             String currentDateStr = d + "-" + m + "-" + y;
+
+            if (currentDateStr.equals(utils.getPreviousDate(getActivity())))
+            dateTextView.setText("Yesterday, (" + currentDateStr + ")");
+
+            else if (currentDateStr.equals(utils.getDate(getActivity())))
+                dateTextView.setText("Today, (" + currentDateStr + ")");
+
+            else dateTextView.setText(currentDateStr);
 
             utils.storeString(getActivity(), CURRENT_DATE_STRING, currentDateStr);
 
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            getActivity().finish();
-            getActivity().startActivity(intent);
+//            Intent intent = new Intent(getActivity(), MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//            getActivity().finish();
+//            getActivity().startActivity(intent);
+
+            pagerAdapter.notifyDataSetChanged();
 
         }
     }
@@ -504,17 +515,7 @@ public class FragmentReferrals extends Fragment {
 //                    LinearLayout noMemberLayout = view.findViewById(R.id.no_team_member_layout);
 //                    noMemberLayout.setVisibility(View.GONE);
 //
-//                    // CLEARING ALL THE ITEMS
-//                    refUsersList.clear();
-//
-//                    // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-//                    for (DataSnapshot dataSnapshot : snapshot.child(mAuth.getCurrentUser().getUid()).child("users").getChildren()) {
-//
-//                        refUsersList.add(dataSnapshot.getValue(refUser.class));
-//
-//                    }
-//
-//                    initRecyclerView(view);
+
 //                } else {
 //
 //                    dialog.dismiss();
