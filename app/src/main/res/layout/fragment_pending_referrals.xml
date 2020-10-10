@@ -10,6 +10,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_pending_referrals"
             android:layout_width="match_parent"
+            android:paddingBottom="80dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content" />
 
         <TextView

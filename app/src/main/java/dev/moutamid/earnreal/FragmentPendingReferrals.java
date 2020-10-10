@@ -40,7 +40,8 @@ public class FragmentPendingReferrals extends Fragment {
 
         private String name, number, city, remarks;
 
-        ReferralDetail() {}
+        ReferralDetail() {
+        }
 
         ReferralDetail(String name, String number, String city, String remarks) {
             this.name = name;
@@ -99,6 +100,13 @@ public class FragmentPendingReferrals extends Fragment {
         if (currentDateString.equals("Error"))
             currentDateString = utils.getPreviousDate(getActivity());
 
+        RefreshReferrals(view);
+
+        return view;
+    }
+
+    private void RefreshReferrals(final View view) {
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot1) {
@@ -118,8 +126,8 @@ public class FragmentPendingReferrals extends Fragment {
                     return;
                 }
 
-                DataSnapshot snapshot = snapshot1.child("referrals").child(mAuth.getCurrentUser().getUid()).child(currentDateString);
-
+                DataSnapshot snapshot = snapshot1.child("referrals")
+                        .child(mAuth.getCurrentUser().getUid()).child(currentDateString);
 
                 // CLEARING ALL THE ITEMS
                 allReferralDetailsList.clear();
@@ -132,7 +140,7 @@ public class FragmentPendingReferrals extends Fragment {
                 }
 
                 // EXTRACTING OUT ONLY THE PENDING REFERRALS AND SHOWING THE RECYCLER VIEW
-                for (int i = 0; i<=allReferralDetailsList.size() - 1; i++){
+                for (int i = 0; i <= allReferralDetailsList.size() - 1; i++) {
 
                     if (allReferralDetailsList.get(i).getRemarks().equals("pg"))
                         pendingReferralDetailsList.add(allReferralDetailsList.get(i));
@@ -154,7 +162,6 @@ public class FragmentPendingReferrals extends Fragment {
             }
         });
 
-        return view;
     }
 
     private void initRecyclerView(View view) {
@@ -219,6 +226,5 @@ public class FragmentPendingReferrals extends Fragment {
             }
         }
     }
-
 
 }

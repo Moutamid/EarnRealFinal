@@ -5,11 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginRight="10dp"
     android:background="@color/white"
-    android:elevation="5dp"
+    android:elevation="4dp"
     android:padding="10dp">
 
     <LinearLayout
@@ -33,7 +34,7 @@
             android:singleLine="true"
             android:text="John williams"
             android:textColor="@color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/number_text_view_layout_referral_details"
@@ -42,7 +43,7 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="03058853833"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/city_text_view_layout_referral_details"
@@ -51,7 +52,7 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="Lahore"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -65,6 +66,6 @@
         android:text="NA"
         android:textAllCaps="true"
         android:textColor="@color/orange"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
 </RelativeLayout>

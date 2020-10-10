@@ -249,11 +249,11 @@ public class FragmentDashboard extends Fragment {
         String paidReferrals = utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT);
 
         if (totalReferrals.equals("Error"))
-        totalReferralsSubmitted_tv.setText("0");
+            totalReferralsSubmitted_tv.setText("0");
         else totalReferralsSubmitted_tv.setText(totalReferrals);
 
         if (paidReferrals.equals("Error"))
-        paidReferrals_tv.setText("0");
+            paidReferrals_tv.setText("0");
         else paidReferrals_tv.setText(paidReferrals);
 
         isDone_getTotalReferralsFromDatabase = true;

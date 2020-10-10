@@ -215,7 +215,8 @@ public class FragmentReferrals extends Fragment {
 
         private String name, number, city, remarks;
 
-        ReferralDetail() {}
+        ReferralDetail() {
+        }
 
         ReferralDetail(String name, String number, String city, String remarks) {
             this.name = name;
@@ -484,7 +485,7 @@ public class FragmentReferrals extends Fragment {
             String currentDateStr = d + "-" + m + "-" + y;
 
             if (currentDateStr.equals(utils.getPreviousDate(getActivity())))
-            dateTextView.setText("Yesterday, (" + currentDateStr + ")");
+                dateTextView.setText("Yesterday, (" + currentDateStr + ")");
 
             else if (currentDateStr.equals(utils.getDate(getActivity())))
                 dateTextView.setText("Today, (" + currentDateStr + ")");
@@ -498,7 +499,8 @@ public class FragmentReferrals extends Fragment {
 //            getActivity().finish();
 //            getActivity().startActivity(intent);
 
-            pagerAdapter.notifyDataSetChanged();
+            ViewPager viewPager = parentView.findViewById(R.id.view_pager_fragment_team);
+            viewPager.setAdapter(pagerAdapter);
 
         }
     }
