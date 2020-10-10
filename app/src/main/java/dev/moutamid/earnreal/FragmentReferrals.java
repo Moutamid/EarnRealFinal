@@ -46,18 +46,15 @@ public class FragmentReferrals extends Fragment {
     private static final String PAID_REFERRALS_AMOUNT = "paid_referrals_amount";
     private static final String CURRENT_DATE_STRING = "current_date_string";
 
-    private String currentDateString;
     private boolean isOnline = false;
     private boolean isNmbrValid = true;
-
-//    private ArrayList<refUser> refUsersList = new ArrayList<>();
 
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
     private Utils utils = new Utils();
 
-    private ProgressDialog dialog;
+    //private ProgressDialog dialog;
 
     @Nullable
     @Override
@@ -217,6 +214,8 @@ public class FragmentReferrals extends Fragment {
     private static class ReferralDetail {
 
         private String name, number, city, remarks;
+
+        ReferralDetail() {}
 
         ReferralDetail(String name, String number, String city, String remarks) {
             this.name = name;
@@ -503,137 +502,5 @@ public class FragmentReferrals extends Fragment {
 
         }
     }
-
-//
-//    private void getTeamFromDatabase(final View view) {
-//        databaseReference.child("teams").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
-//
-//                    LinearLayout noMemberLayout = view.findViewById(R.id.no_team_member_layout);
-//                    noMemberLayout.setVisibility(View.GONE);
-//
-
-//                } else {
-//
-//                    dialog.dismiss();
-//
-//                    // USER HAS NOT INVITED ANYONE
-//                    Log.i(TAG, "onDataChange: No child exists");
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.w(TAG, "onCancelled: " + error.toException());
-//
-//                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//    }
-//
-//    private void initRecyclerView(View view) {
-//        Log.d(TAG, "initRecyclerView: ");
-//
-//        RecyclerView conversationRecyclerView = view.findViewById(R.id.team_recyclerView);
-//        RecyclerViewAdapterTeam adapter = new RecyclerViewAdapterTeam();
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//
-//        conversationRecyclerView.setLayoutManager(linearLayoutManager);
-//        conversationRecyclerView.setHasFixedSize(true);
-//        conversationRecyclerView.setNestedScrollingEnabled(false);
-//
-//        conversationRecyclerView.setAdapter(adapter);
-//
-//        dialog.dismiss();
-//    }
-//
-//    private static class refUser {
-//
-//        private String email;
-//        private boolean paid;
-//
-//        refUser() {
-//
-//        }
-//
-//        public refUser(String email, boolean paid) {
-//            this.email = email;
-//            this.paid = paid;
-//        }
-//
-//        public boolean isPaid() {
-//            return paid;
-//        }
-//
-//        public void setPaid(boolean paid) {
-//            this.paid = paid;
-//        }
-//
-//        public String getEmail() {
-//            return email;
-//        }
-//
-//        public void setEmail(String email) {
-//            this.email = email;
-//        }
-//
-//    }
-//
-//    private class RecyclerViewAdapterTeam extends RecyclerView.Adapter
-//            <RecyclerViewAdapterTeam.ViewHolderTeam> {
-//
-//        @NonNull
-//        @Override
-//        public ViewHolderTeam onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-//            Log.d(TAG, "onCreateViewHolder: ");
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_team_members, parent, false);
-//            return new ViewHolderTeam(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull ViewHolderTeam holder, int position) {
-//            Log.d(TAG, "onBindViewHolder: " + position);
-//
-//            if (refUsersList.get(position).isPaid()) {
-//
-//                holder.paidStatusImg.setImageResource(R.drawable.ic_done);
-//                holder.userEmail.setText(refUsersList.get(position).getEmail());
-//                holder.userStatusTxt.setText("PAID");
-//
-//            } else {
-//
-//                holder.userEmail.setText(refUsersList.get(position).getEmail());
-//
-//            }
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            if (refUsersList == null)
-//                return 0;
-//
-//            return refUsersList.size();
-//        }
-//
-//        public class ViewHolderTeam extends RecyclerView.ViewHolder {
-//
-//            TextView userEmail, userStatusTxt;
-//            ImageView paidStatusImg;
-//
-//            public ViewHolderTeam(@NonNull View v) {
-//                super(v);
-//
-//                userEmail = v.findViewById(R.id.user_email_layout_team);
-//                userStatusTxt = v.findViewById(R.id.paid_status_textview_layout_team);
-//                paidStatusImg = v.findViewById(R.id.paid_status_image_layout_team);
-//            }
-//        }
-//    }
 
 }

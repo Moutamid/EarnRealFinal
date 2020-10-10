@@ -245,8 +245,16 @@ public class FragmentDashboard extends Fragment {
 
     private void getReferralsAmount() {
 
-        totalReferralsSubmitted_tv.setText(utils.getStoredString(getActivity(), TOTAL_REFERRALS_AMOUNT));
-        paidReferrals_tv.setText(utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT));
+        String totalReferrals = utils.getStoredString(getActivity(), TOTAL_REFERRALS_AMOUNT);
+        String paidReferrals = utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT);
+
+        if (totalReferrals.equals("Error"))
+        totalReferralsSubmitted_tv.setText("0");
+        else totalReferralsSubmitted_tv.setText(totalReferrals);
+
+        if (paidReferrals.equals("Error"))
+        paidReferrals_tv.setText("0");
+        else paidReferrals_tv.setText(paidReferrals);
 
         isDone_getTotalReferralsFromDatabase = true;
 
