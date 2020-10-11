@@ -99,7 +99,7 @@ public class FragmentApprovedReferrals extends Fragment {
         noDataTextView = view.findViewById(R.id.no_data_text_view_approved_referrals);
 
         if (currentDateString.equals("Error"))
-            currentDateString = utils.getPreviousDate(getActivity());
+            currentDateString = utils.getDate(getActivity());
 
         RefreshApprovedReferrals(view);
 
@@ -133,6 +133,7 @@ public class FragmentApprovedReferrals extends Fragment {
 
                 // CLEARING ALL THE ITEMS
                 allReferralDetailsList.clear();
+                approvedReferralDetailsList.clear();
 
                 // LOOPING THROUGH ALL THE CHILDREN OF TEAM
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

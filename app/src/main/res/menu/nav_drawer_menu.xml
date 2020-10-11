@@ -21,7 +21,7 @@
 <!--            android:title="Daily Ads" />-->
         <item
             android:id="@+id/nav_referrals_id"
-            android:title="Referrals"
+            android:title="Referral details"
             android:icon="@drawable/ic_team" />
         <item
             android:id="@+id/nav_withdraw_id"

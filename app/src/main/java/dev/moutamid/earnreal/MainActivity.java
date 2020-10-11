@@ -19,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.krishna.securetimer.SecureTimer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //setUrduSwitchListener();
 
         SecureTimer.with(getApplicationContext()).initialize();
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     private boolean checkLoginStatus() {
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_dashboard_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentDashboard())
                         .commit();
-                toolbar.setTitle("EarnReal - Dashboard");
+                toolbar.setTitle("Dashboard");
                 closeDrawer();
                 break;
 //            case R.id.nav_upgrade_id:
@@ -150,13 +153,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_referrals_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentReferrals())
                         .commit();
-                toolbar.setTitle("EarnReal - Referrals");
+                toolbar.setTitle("Referral details");
                 closeDrawer();
                 break;
             case R.id.nav_withdraw_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentWithdraw())
                         .commit();
-                toolbar.setTitle("EarnReal - Withdraw");
+                toolbar.setTitle("Withdraw details");
                 closeDrawer();
                 break;
 //            case R.id.nav_payment_proof_id:
@@ -168,19 +171,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_privacy_policy_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentPrivacyPolicy())
                         .commit();
-                toolbar.setTitle("EarnReal - Privacy policy");
+                toolbar.setTitle("Privacy policy");
                 closeDrawer();
                 break;
             case R.id.nav_terms_of_services_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentTermsOfServices())
                         .commit();
-                toolbar.setTitle("EarnReal - Terms of services");
+                toolbar.setTitle("Terms of services");
                 closeDrawer();
                 break;
             case R.id.nav_contact_us_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentContactUs())
                         .commit();
-                toolbar.setTitle("EarnReal - Contact us");
+                toolbar.setTitle("Contact us");
                 closeDrawer();
                 break;
 //            case R.id.nav_help_id:

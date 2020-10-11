@@ -5,9 +5,9 @@
     android:layout_marginStart="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
     android:background="@color/white"
     android:elevation="4dp"
     android:padding="10dp">
@@ -20,50 +20,58 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toStartOf="@id/remarks_text_view_layout_referral_details"
-        android:layout_toLeftOf="@id/remarks_text_view_layout_referral_details"
+        android:layout_toStartOf="@id/amount_text_view_layout_withdraw_detail"
+        android:layout_toLeftOf="@id/amount_text_view_layout_withdraw_detail"
         android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/name_text_view_layout_referral_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="John williams"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/number_text_view_layout_referral_details"
+            android:id="@+id/number_text_view_layout_withdraw_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:text="03058853833"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/city_text_view_layout_referral_details"
+            android:id="@+id/date_text_view_layout_withdraw_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="Lahore"
+            android:text="11/10/2020"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/method_text_view_layout_withdraw_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Easypaisa"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tid_text_view_layout_withdraw_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="TID# 90328738273262"
             android:textSize="18sp" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/remarks_text_view_layout_referral_details"
+        android:id="@+id/amount_text_view_layout_withdraw_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:text="NA"
-        android:textAllCaps="true"
+        android:text="Rs: 1000"
         android:textColor="@color/orange"
         android:textSize="25sp" />
 

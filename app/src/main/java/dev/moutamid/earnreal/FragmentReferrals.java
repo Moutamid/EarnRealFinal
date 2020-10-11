@@ -106,7 +106,7 @@ public class FragmentReferrals extends Fragment {
 
 //        }
 
-        utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getPreviousDate(getActivity()));
+        utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getDate(getActivity()));
 
         ViewPager viewPager = view.findViewById(R.id.view_pager_fragment_team);
         final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
@@ -116,7 +116,7 @@ public class FragmentReferrals extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         TextView dateTextView = view.findViewById(R.id.current_date_textview);
-        dateTextView.setText("Yesterday, (" + utils.getPreviousDate(getActivity()) + ")");
+        dateTextView.setText("Today, (" + utils.getDate(getActivity()) + ")");
 
         view.findViewById(R.id.date_picker_layout).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,6 +276,7 @@ public class FragmentReferrals extends Fragment {
                 if (task.isSuccessful()) {
                     dialog1.dismiss();
                     referralDialog.dismiss();
+                    updateCounter();
                     utils.showWorkDoneDialog(getActivity(), "Detail uploaded!", "Your referral detail is successfully submitted and you wil get a response feedback in approx 28 hours.");
                 } else {
                     dialog1.dismiss();
@@ -310,6 +311,50 @@ public class FragmentReferrals extends Fragment {
 //
 //            }
 //        });
+
+    }
+
+    private void updateCounter() {
+
+        databaseReference.child("referrals")
+                .child(mAuth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.hasChild("total_referrals")) {
+
+                    long counter = (long) snapshot.child("total_referrals").getValue();
+
+                    databaseReference
+                            .child("referrals")
+                            .child(mAuth.getCurrentUser().getUid())
+                            .child("total_referrals")
+                            .setValue(++counter);
+
+                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, String.valueOf(counter));
+
+                }else {
+
+                    long nmbr = 1;
+
+                    databaseReference
+                            .child("referrals")
+                            .child(mAuth.getCurrentUser().getUid())
+                            .child("total_referrals")
+                            .setValue(nmbr);
+
+                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, "1");
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

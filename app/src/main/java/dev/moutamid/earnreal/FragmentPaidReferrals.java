@@ -98,7 +98,7 @@ public class FragmentPaidReferrals extends Fragment {
         noDataTextView = view.findViewById(R.id.no_data_text_view_paid_referrals);
 
         if (currentDateString.equals("Error"))
-            currentDateString = utils.getPreviousDate(getActivity());
+            currentDateString = utils.getDate(getActivity());
 
         RefreshPaidReferrals(view);
 
@@ -132,6 +132,7 @@ public class FragmentPaidReferrals extends Fragment {
 
                 // CLEARING ALL THE ITEMS
                 allReferralDetailsList.clear();
+                paidReferralDetailsList.clear();
 
                 // LOOPING THROUGH ALL THE CHILDREN OF TEAM
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

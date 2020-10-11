@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="Loading..."
                     android:id="@+id/current_balance_tv_dashboard"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -87,7 +87,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="Loading..."
                     android:id="@+id/total_withdraw_tv_dashboard"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="Loading..."
                 android:textColor="@color/white"
                 android:id="@+id/paid_members_tv_dashboard"
                 android:textStyle="bold"
@@ -144,7 +144,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="Loading..."
                 android:id="@+id/team_members_tv_dashboard"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -186,7 +186,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="Loading..."
                     android:id="@+id/total_balance_tv_dashboard"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -221,7 +221,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Level 1"
+                    android:text="Loading..."
                     android:textColor="@color/white"
                     android:id="@+id/account_status_tv_dashboard"
                     android:textStyle="bold"

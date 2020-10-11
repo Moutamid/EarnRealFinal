@@ -98,7 +98,7 @@ public class FragmentPendingReferrals extends Fragment {
         noDataTextView = view.findViewById(R.id.no_data_text_view_pending_referrals);
 
         if (currentDateString.equals("Error"))
-            currentDateString = utils.getPreviousDate(getActivity());
+            currentDateString = utils.getDate(getActivity());
 
         RefreshReferrals(view);
 
@@ -131,6 +131,7 @@ public class FragmentPendingReferrals extends Fragment {
 
                 // CLEARING ALL THE ITEMS
                 allReferralDetailsList.clear();
+                pendingReferralDetailsList.clear();
 
                 // LOOPING THROUGH ALL THE CHILDREN OF TEAM
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

@@ -31,7 +31,7 @@ public class FragmentDashboard extends Fragment {
     private static final String TOTAL_REFERRALS_AMOUNT = "total_referrals_amount";
     private static final String PAID_REFERRALS_AMOUNT = "paid_referrals_amount";
 
-    private ArrayList<refUser> refUsersList = new ArrayList<>();
+    //private ArrayList<refUser> refUsersList = new ArrayList<>();
     private ArrayList<String> paid_membersList = new ArrayList<>();
     private TextView totalBalance_tv, totalWithdraw_tv, currentBalance_tv, accountStatus_tv;
     private TextView totalReferralsSubmitted_tv, paidReferrals_tv;
@@ -71,6 +71,17 @@ public class FragmentDashboard extends Fragment {
 
         // SETTING INFORMATION DIALOGS ON ALL THE LAYOUTS
         setDialogsOnAllLayouts(view);
+
+//        // TEST DATA
+//        AccountDetails details = new AccountDetails(
+//                "0",
+//                "0",
+//                "0",
+//                "Level 1",
+//                "0"
+//        );
+//        databaseReference.child("users")
+//                .child(mAuth.getCurrentUser().getUid()).setValue(details);
 
         return view;
     }
@@ -224,8 +235,27 @@ public class FragmentDashboard extends Fragment {
 
                 if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
 
-                    AccountDetails accountDetails = snapshot.child(mAuth.getCurrentUser().getUid()).getValue(AccountDetails.class);
-                    setValuesToTextViews(accountDetails.getTotal_balance(), accountDetails.getTotal_withdraw(), accountDetails.getCurrent_balance(), accountDetails.getAccount_status());
+                    AccountDetails accountDetails = snapshot
+                            .child(mAuth.getCurrentUser().getUid())
+                            .getValue(AccountDetails.class);
+
+                    setValuesToTextViews(
+                            accountDetails.getTotal_balance(),
+                            accountDetails.getTotal_withdraw(),
+                            accountDetails.getCurrent_balance(),
+                            accountDetails.getAccount_status(),
+                            accountDetails.getPaid_referrals()
+                    );
+
+                } else {
+
+                    setValuesToTextViews(
+                            "0.00",
+                            "0.00",
+                            "0.00",
+                            "Level 1",
+                            "0"
+                    );
 
                 }
                 isDone_getDetailsFromDatabase = true;
@@ -246,74 +276,27 @@ public class FragmentDashboard extends Fragment {
     private void getReferralsAmount() {
 
         String totalReferrals = utils.getStoredString(getActivity(), TOTAL_REFERRALS_AMOUNT);
-        String paidReferrals = utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT);
+        //String paidReferrals = utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT);
 
         if (totalReferrals.equals("Error"))
             totalReferralsSubmitted_tv.setText("0");
         else totalReferralsSubmitted_tv.setText(totalReferrals);
 
-        if (paidReferrals.equals("Error"))
-            paidReferrals_tv.setText("0");
-        else paidReferrals_tv.setText(paidReferrals);
-
         isDone_getTotalReferralsFromDatabase = true;
-
-//        databaseReference.child("referrals").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-//                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
-//
-//                    // CLEARING ALL THE ITEMS
-//                    refUsersList.clear();
-//                    paid_membersList.clear();
-//
-//                    // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-//                    for (DataSnapshot dataSnapshot : snapshot.child(mAuth.getCurrentUser().getUid()).child("users").getChildren()) {
-//
-//                        refUsersList.add(dataSnapshot.getValue(refUser.class));
-//
-//                    }// COUNTING AMOUNT OF TEAM MEMBERS AND SETTING TO TEXT VIEW
-//                    totalReferralsSubmitted_tv.setText(String.valueOf(refUsersList.size()));
-//
-//                    // LOOPING THROUGH THE TEAM LIST AND EXTRACTING OUT PAID MEMBERS
-//                    for (int i = 0; i <= refUsersList.size() - 1; i++) {
-//                        if (refUsersList.get(i).isPaid()) {
-//                            paid_membersList.add(refUsersList.get(i).getEmail());
-//                        }
-//                    }// COUNTING THE PAID MEMBERS LIST AND SETTING THE SIZE TO TEXT VIEW
-//                    paidReferrals_tv.setText(String.valueOf(paid_membersList.size()));
-//
-//                } else {
-//                    Log.i(TAG, "onDataChange: No child exists");
-//
-//                    totalReferralsSubmitted_tv.setText("0");
-//                    paidReferrals_tv.setText("0");
-//                }
-//
-//                isDone_getTotalReferralsFromDatabase = true;
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.w(TAG, "onCancelled: " + error.toException());
-//
-//                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                isDone_getTotalReferralsFromDatabase = true;
-//            }
-//        });
 
     }
 
-    private void setValuesToTextViews(String total_balance, String total_withdraw, String current_balance, String account_status) {
+    private void setValuesToTextViews(String total_balance,
+                                      String total_withdraw,
+                                      String current_balance,
+                                      String account_status, String paidReferrals) {
         Log.i(TAG, "setValuesToTextViews: ");
 
         totalBalance_tv.setText(total_balance);
         totalWithdraw_tv.setText(total_withdraw);
         currentBalance_tv.setText(current_balance);
         accountStatus_tv.setText(account_status);
+        paidReferrals_tv.setText(paidReferrals);
     }
 
     private void initViews(View v) {
@@ -330,13 +313,21 @@ public class FragmentDashboard extends Fragment {
 
     private static class AccountDetails {
 
-        private String total_balance, current_balance, total_withdraw, account_status;
+        private String total_balance, current_balance,
+                total_withdraw, account_status, paid_referrals;
 
-        public AccountDetails(String total_balance, String current_balance, String total_withdraw, String account_status) {
-            this.total_balance = total_balance;
-            this.current_balance = current_balance;
-            this.total_withdraw = total_withdraw;
-            this.account_status = account_status;
+        public AccountDetails(String totalBalance, String currentBalance, String totalWithdraw,
+                              String accountStatus,
+                              String paidReferrals) {
+
+            this.total_balance = totalBalance;
+            this.current_balance = currentBalance;
+            this.total_withdraw = totalWithdraw;
+            this.account_status = accountStatus;
+            this.paid_referrals = paidReferrals;
+        }
+
+        AccountDetails() {
         }
 
         public String getTotal_balance() {
@@ -371,40 +362,45 @@ public class FragmentDashboard extends Fragment {
             this.account_status = account_status;
         }
 
-        AccountDetails() {
+        public String getPaid_referrals() {
+            return paid_referrals;
+        }
+
+        public void setPaid_referrals(String paid_referrals) {
+            this.paid_referrals = paid_referrals;
         }
     }
 
-    private static class refUser {
-
-        private String email;
-        private boolean paid;
-
-        refUser() {
-
-        }
-
-        public refUser(String email, boolean paid) {
-            this.email = email;
-            this.paid = paid;
-        }
-
-        public boolean isPaid() {
-            return paid;
-        }
-
-        public void setPaid(boolean paid) {
-            this.paid = paid;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-    }
+//    private static class refUser {
+//
+//        private String email;
+//        private boolean paid;
+//
+//        refUser() {
+//
+//        }
+//
+//        public refUser(String email, boolean paid) {
+//            this.email = email;
+//            this.paid = paid;
+//        }
+//
+//        public boolean isPaid() {
+//            return paid;
+//        }
+//
+//        public void setPaid(boolean paid) {
+//            this.paid = paid;
+//        }
+//
+//        public String getEmail() {
+//            return email;
+//        }
+//
+//        public void setEmail(String email) {
+//            this.email = email;
+//        }
+//
+//    }
 
 }
