@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:gravity="center"
-            android:text="Leave a message on any of these accountDetails and we'll try to help you as soon as possible."/>
+            android:text="Leave a message on any of these departments and we'll try to help you as soon as possible."/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,21 +23,20 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/boy0"/>
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:text="03494628929"
-                android:layout_marginLeft="10dp" />
+                android:text="Communication department"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="03494628929" />
 
         </LinearLayout>
 
@@ -47,12 +46,84 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Ad department"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="03494628929" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Commission department"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="03494628929" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="Care department"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="03494628929" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="20dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/boy0"/>
+                android:src="@drawable/facebook"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,7 +131,7 @@
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:text="lumianokia188@gmail.com"
+                android:text="/ Online marketing"
                 android:layout_marginLeft="10dp" />
 
         </LinearLayout>
@@ -77,7 +148,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/boy0"/>
+                android:src="@drawable/instagram"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,7 +156,7 @@
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:text="Facebook"
+                android:text="/Online marketing"
                 android:layout_marginLeft="10dp" />
 
         </LinearLayout>
@@ -102,7 +173,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/boy0"/>
+                android:src="@drawable/twitter"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -110,57 +181,7 @@
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:textColor="@color/black"
-                android:text="Instagram"
-                android:layout_marginLeft="10dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/boy0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:text="Twitter"
-                android:layout_marginLeft="10dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/boy0"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:text="Youtube"
+                android:text="/Online marketing"
                 android:layout_marginLeft="10dp" />
 
         </LinearLayout>
