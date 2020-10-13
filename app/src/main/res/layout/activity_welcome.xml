@@ -6,32 +6,6 @@
     android:background="@color/white"
     tools:context=".ActivityWelcome">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:visibility="gone"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="70dp"
-            android:text="Urdu"
-            android:textColor="@color/darkBlue"
-            android:layout_marginTop="10dp"
-            android:background="@color/grey"
-            android:layout_height="30dp"/>
-
-        <Button
-            android:layout_width="70dp"
-            android:text="English"
-            android:background="@color/orange"
-            android:textColor="@color/white"
-            android:layout_margin="10dp"
-            android:layout_height="30dp"/>
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/icon_welcome"
         android:layout_width="wrap_content"
@@ -61,7 +35,7 @@
         android:textStyle="bold"
         android:layout_marginLeft="30dp" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/loginBtn_welcome"
@@ -72,12 +46,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Chat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globe Chat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globeChat with strangers, share statuses fast with high quality and get engaged with anonymous people around the globe"
+            android:text="EarnReal is an Online marketing system (Referral based) to make money. We aim to bring the online marketing system to the optimum level by providing such a trusted and user friendly platform to the community."
             android:textAlignment="center"
+            android:layout_centerInParent="true"
             android:textColor="@color/black"
             android:textSize="17sp" />
 
-    </ScrollView>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/loginBtn_welcome"

@@ -28,15 +28,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Communication department"/>
+                android:text="Communication department:"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="03494628929" />
+                android:textSize="18sp"
+                android:text="03123456789" />
 
         </LinearLayout>
 
@@ -51,15 +51,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Ad department"/>
+                android:text="Ad department:"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="03494628929" />
+                android:textSize="18sp"
+                android:text="03123456789" />
 
         </LinearLayout>
 
@@ -75,15 +75,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Commission department"/>
+                android:text="Commission department:"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="03494628929" />
+                android:textSize="18sp"
+                android:text="03123456789" />
 
         </LinearLayout>
 
@@ -99,15 +99,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="Care department"/>
+                android:text="Care department:"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="03494628929" />
+                android:textSize="18sp"
+                android:text="03123456789" />
 
         </LinearLayout>
 
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:paddingTop="20dp"
+            android:paddingTop="30dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -129,9 +129,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
-                android:text="/ Online marketing"
+                android:text="/Online marketing"
                 android:layout_marginLeft="10dp" />
 
         </LinearLayout>
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:text="/Online marketing"
                 android:layout_marginLeft="10dp" />
@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:text="/Online marketing"
                 android:layout_marginLeft="10dp" />

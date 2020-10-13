@@ -195,6 +195,7 @@ public class Utils {
                 .setMessage(message)
                 .setPositiveButton(positiveBtnName, positiveListener)
                 .setNegativeButton(negativeBtnName, negativeListener)
-                .show();
+                .show()
+                .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.darkPink));
     }
 }

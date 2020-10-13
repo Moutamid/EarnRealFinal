@@ -19,7 +19,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.krishna.securetimer.SecureTimer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         SecureTimer.with(getApplicationContext()).initialize();
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
     }
 
     private boolean checkLoginStatus() {
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      */
     private void initializeViews() {
         toolbar = findViewById(R.id.toolbar_id);
-        toolbar.setTitle("EarnReal - Dashboard");
+        toolbar.setTitle("Dashboard");
         drawerLayout = findViewById(R.id.drawer_layout_id);
         frameLayout = findViewById(R.id.framelayout_id);
         navigationView = findViewById(R.id.navigationview_id);
