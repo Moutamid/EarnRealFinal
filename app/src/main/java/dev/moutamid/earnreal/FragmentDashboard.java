@@ -248,8 +248,6 @@ public class FragmentDashboard extends Fragment {
                             accountDetails.getTotal_referrals()
                     );
 
-                    dialog.dismiss();
-
                 } else {
 
                     setValuesToTextViews(
@@ -258,12 +256,12 @@ public class FragmentDashboard extends Fragment {
                             "0.00",
                             "Level 1",
                             "0",
-                            "0"
+                            0
                     );
 
-                    dialog.dismiss();
+
                 }
-                //isDone_getDetailsFromDatabase = true;
+                dialog.dismiss();
             }
 
             @Override
@@ -296,7 +294,7 @@ public class FragmentDashboard extends Fragment {
                                       String current_balance,
                                       String account_status,
                                       String paidReferrals,
-                                      String totalReferrals) {
+                                      int totalReferrals) {
         Log.i(TAG, "setValuesToTextViews: ");
 
         totalBalance_tv.setText(total_balance);
@@ -304,7 +302,7 @@ public class FragmentDashboard extends Fragment {
         currentBalance_tv.setText(current_balance);
         accountStatus_tv.setText(account_status);
         paidReferrals_tv.setText(paidReferrals);
-        totalReferralsSubmitted_tv.setText(totalReferrals);
+        totalReferralsSubmitted_tv.setText(String.valueOf(totalReferrals));
     }
 
     private void initViews(View v) {
@@ -322,11 +320,12 @@ public class FragmentDashboard extends Fragment {
     private static class AccountDetails {
 
         private String total_balance, current_balance,
-                total_withdraw, account_status, paid_referrals, total_referrals;
+                total_withdraw, account_status, paid_referrals;
+        private int total_referrals;
 
         public AccountDetails(String totalBalance, String currentBalance, String totalWithdraw,
                               String accountStatus,
-                              String paidReferrals, String totalReferrals) {
+                              String paidReferrals, int totalReferrals) {
 
             this.total_balance = totalBalance;
             this.current_balance = currentBalance;
@@ -379,11 +378,11 @@ public class FragmentDashboard extends Fragment {
             this.paid_referrals = paid_referrals;
         }
 
-        public String getTotal_referrals() {
+        public int getTotal_referrals() {
             return total_referrals;
         }
 
-        public void setTotal_referrals(String total_referrals) {
+        public void setTotal_referrals(int total_referrals) {
             this.total_referrals = total_referrals;
         }
     }
