@@ -48,13 +48,15 @@ public class FragmentReferrals extends Fragment {
 
     private boolean isOnline = false;
     private boolean isNmbrValid = true;
+    private TextView dateTextView;
 
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
     private Utils utils = new Utils();
 
-    //private ProgressDialog dialog;
+    private ViewPagerAdapter viewPagerAdapter;
+    private ViewPager viewPager;
 
     @Nullable
     @Override
@@ -108,14 +110,15 @@ public class FragmentReferrals extends Fragment {
 
         utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getDate(getActivity()));
 
-        ViewPager viewPager = view.findViewById(R.id.view_pager_fragment_team);
-        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        viewPager = view.findViewById(R.id.view_pager_fragment_team);
+        viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
 
-        TextView dateTextView = view.findViewById(R.id.current_date_textview);
+
+        dateTextView = view.findViewById(R.id.current_date_textview);
         dateTextView.setText("Today, (" + utils.getDate(getActivity()) + ")");
 
         view.findViewById(R.id.date_picker_layout).setOnClickListener(new View.OnClickListener() {
@@ -278,6 +281,7 @@ public class FragmentReferrals extends Fragment {
                     referralDialog.dismiss();
                     updateCounter();
                     utils.showWorkDoneDialog(getActivity(), "Detail uploaded!", "Your referral detail is successfully submitted and you wil get a response feedback in approx 28 hours.");
+                    updateViewPagerWithCurrentDate();
                 } else {
                     dialog1.dismiss();
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -314,47 +318,53 @@ public class FragmentReferrals extends Fragment {
 
     }
 
+    private void updateViewPagerWithCurrentDate() {
+        utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getDate(getActivity()));
+        viewPager.setAdapter(viewPagerAdapter);
+        dateTextView.setText("Today, (" + utils.getDate(getActivity()) + ")");
+    }
+
     private void updateCounter() {
 
-        databaseReference.child("referrals")
+        databaseReference.child("users")
                 .child(mAuth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.hasChild("total_referrals")) {
+                        if (snapshot.hasChild("total_referrals")) {
 
-                    long counter = (long) snapshot.child("total_referrals").getValue();
+                            long counter = (long) snapshot.child("total_referrals").getValue();
 
-                    databaseReference
-                            .child("referrals")
-                            .child(mAuth.getCurrentUser().getUid())
-                            .child("total_referrals")
-                            .setValue(++counter);
+                            databaseReference
+                                    .child("users")
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .child("total_referrals")
+                                    .setValue(++counter);
 
-                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, String.valueOf(counter));
+                            //utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, String.valueOf(counter));
 
-                }else {
+                        } else {
 
-                    long nmbr = 1;
+                            long nmbr = 1;
 
-                    databaseReference
-                            .child("referrals")
-                            .child(mAuth.getCurrentUser().getUid())
-                            .child("total_referrals")
-                            .setValue(nmbr);
+                            databaseReference
+                                    .child("users")
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .child("total_referrals")
+                                    .setValue(nmbr);
 
-                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, "1");
+                            //utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, "1");
 
-                }
+                        }
 
-            }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                    }
+                });
 
     }
 
@@ -538,11 +548,6 @@ public class FragmentReferrals extends Fragment {
             else dateTextView.setText(currentDateStr);
 
             utils.storeString(getActivity(), CURRENT_DATE_STRING, currentDateStr);
-
-//            Intent intent = new Intent(getActivity(), MainActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//            getActivity().finish();
-//            getActivity().startActivity(intent);
 
             ViewPager viewPager = parentView.findViewById(R.id.view_pager_fragment_team);
             viewPager.setAdapter(pagerAdapter);

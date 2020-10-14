@@ -131,7 +131,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_payment_proof" />
+            android:src="@drawable/ic_city_name" />
 
         <EditText
             android:id="@+id/city_name_edit_text_dialog_ad_referral"

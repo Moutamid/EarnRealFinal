@@ -12,17 +12,44 @@
             android:layout_width="match_parent"
             android:paddingBottom="80dp"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:layout_height="wrap_content" />
 
-        <TextView
+        <LinearLayout
             android:id="@+id/no_data_text_view_approved_referrals"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="NO DATA"
-            android:textSize="30sp"
-            android:visibility="gone" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_no_referrals_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:text="You have no approved referrals"
+                android:textColor="#D1CFCF"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:text="You will get a feedback on referrals after 28 hours"
+                android:textColor="#D1CFCF"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+
 
 
     </RelativeLayout>

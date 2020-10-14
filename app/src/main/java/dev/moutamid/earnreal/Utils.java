@@ -189,12 +189,13 @@ public class Utils {
                 .setAction("Action", null).show();
     }
 
-    public void showDialog(Context context, String title, String message, String positiveBtnName, String negativeBtnName, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
+    public void showDialog(Context context, String title, String message, String positiveBtnName, String negativeBtnName, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener, boolean cancellable) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(positiveBtnName, positiveListener)
                 .setNegativeButton(negativeBtnName, negativeListener)
+                .setCancelable(cancellable)
                 .show()
                 .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.darkPink));
     }

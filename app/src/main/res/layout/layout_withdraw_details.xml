@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="03058853833"
+            android:text="03123456789"
             android:textColor="@color/black"
             android:textSize="20sp" />
 

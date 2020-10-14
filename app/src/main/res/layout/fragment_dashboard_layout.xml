@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Loading..."
-                android:id="@+id/team_members_tv_dashboard"
+                android:id="@+id/total_referrals_tv_dashboard"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
@@ -159,7 +159,7 @@
             android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:background="@drawable/bg_dashboard_item_7"
+            android:background="@drawable/bg_dashboard_item_4"
             android:orientation="vertical">
 
             <TextView

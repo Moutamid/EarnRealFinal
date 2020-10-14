@@ -10,19 +10,45 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_paid_referrals"
             android:layout_width="match_parent"
-            android:paddingBottom="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/no_data_text_view_paid_referrals"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:text="NO DATA"
-            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="80dp"
             android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/no_data_text_view_paid_referrals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_no_referrals_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:text="You have no paid referrals"
+                android:textColor="#D1CFCF"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:text="No-one paid for their membership on this date"
+                android:textColor="#D1CFCF"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>

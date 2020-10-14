@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="03058853833"
+            android:text="03123456789"
             android:textSize="18sp" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:text="Lahore"
+            android:text="New york"
             android:textSize="18sp" />
 
     </LinearLayout>

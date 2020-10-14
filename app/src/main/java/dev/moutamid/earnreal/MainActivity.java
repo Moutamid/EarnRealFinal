@@ -19,6 +19,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.krishna.securetimer.SecureTimer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,14 +36,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     //private TextView nav_phone_number;
     private Utils utils = new Utils();
+    private DatabaseReference databaseReference;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.keepSynced(true);
+
         if (checkLoginStatus())
             return;
+
+        checkBanStatus();
+
+        //checkAppUpdateStatus();
 
         initializeViews();
         toggleDrawer();
@@ -48,6 +65,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SecureTimer.with(getApplicationContext()).initialize();
 
 
+    }
+
+    private void checkBanStatus() {
+
+        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
+
+                    if (snapshot.child(mAuth.getCurrentUser().getUid()).hasChild("isBan")) {
+                        if (snapshot.child(mAuth.getCurrentUser().getUid())
+                                .child("isBan")
+                                .getValue(Boolean.class)) {
+
+                            utils.showDialog(MainActivity.this,
+                                    "",
+                                    "Your account is temporarily disabled! Contact Care department for furthur details.",
+                                    "",
+                                    "",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    },
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    },
+                                    false
+                            );
+
+                        }
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private boolean checkLoginStatus() {
@@ -220,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "Done", Toast.LENGTH_SHORT).show();
                 dialogInterface.dismiss();
             }
-        });
+        }, true);
     }
 
     /**

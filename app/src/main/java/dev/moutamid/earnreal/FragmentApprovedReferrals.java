@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class FragmentApprovedReferrals extends Fragment {
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
     private String currentDateString;
-    private TextView noDataTextView;
+    private LinearLayout noDataTextView;
 
     private ArrayList<ReferralDetail> allReferralDetailsList = new ArrayList<>();
     private ArrayList<ReferralDetail> approvedReferralDetailsList = new ArrayList<>();
