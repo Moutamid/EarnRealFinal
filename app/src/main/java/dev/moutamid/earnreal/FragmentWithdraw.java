@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 public class FragmentWithdraw extends Fragment {
     private static final String TAG = "FragmentWithdraw";
 
-    private TextView noDataTextView;
+    private LinearLayout noDataTextView;
 
     private ArrayList<withdrawDetails> withdrawDetailsList = new ArrayList<>();
 
@@ -53,63 +54,71 @@ public class FragmentWithdraw extends Fragment {
 
         RefreshApprovedReferrals(view);
 
+        //testMethod();
+
         return view;
     }
 
-//    private void testMethod() {
-//
-//        withdrawDetails withdrawDetailstest = new withdrawDetails(
-//                "03058853833",
-//                "90124678573",
-//                "11/10/2020",
-//                "500",
-//                "Easypaisa");
-//
-//        databaseReference.child("withdraw_details")
-//                .child(mAuth.getCurrentUser().getUid())
-//                .push()
-//                .setValue(withdrawDetailstest);
-//    }
+    private void testMethod() {
+
+        withdrawDetails withdrawDetailstest = new withdrawDetails(
+                "03058853833",
+                "90124678573",
+                "11/10/2020",
+                "500",
+                "Easypaisa");
+
+        databaseReference.child("withdraw_details").child(mAuth.getCurrentUser().getUid())
+                .push()
+                .setValue(withdrawDetailstest);
+    }
 
     private void RefreshApprovedReferrals(final View view) {
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot1) {
+        databaseReference.child("withdraw_details").child(mAuth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot1) {
 
-                if (!snapshot1.hasChild("withdraw_details")) {
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
+//                if (!snapshot1.hasChild("withdraw_details")) {
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+//
+//                if (!snapshot1) {
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+//
+//                DataSnapshot snapshot = snapshot1.child("withdraw_details")
+//                        .child(mAuth.getCurrentUser().getUid());
 
-                if (!snapshot1.child("withdraw_details").hasChild(mAuth.getCurrentUser().getUid())) {
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
+                        // CLEARING ALL THE ITEMS
 
-                DataSnapshot snapshot = snapshot1.child("withdraw_details")
-                        .child(mAuth.getCurrentUser().getUid());
+                        if (!snapshot1.exists()) {
+                            noDataTextView.setVisibility(View.VISIBLE);
+                            return;
+                        }
 
-                // CLEARING ALL THE ITEMS
-                withdrawDetailsList.clear();
+                        withdrawDetailsList.clear();
 
-                // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        // LOOPING THROUGH ALL THE CHILDREN OF TEAM
+                        for (DataSnapshot dataSnapshot : snapshot1.getChildren()) {
 
-                    withdrawDetailsList.add(dataSnapshot.getValue(withdrawDetails.class));
+                            withdrawDetailsList.add(dataSnapshot.getValue(withdrawDetails.class));
 
-                }
+                        }
 
-                initRecyclerView(view);
+                        initRecyclerView(view);
 
-            }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "onCancelled: ", error.toException());
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w(TAG, "onCancelled: ", error.toException());
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 
@@ -276,7 +285,8 @@ public class FragmentWithdraw extends Fragment {
             this.method = method;
         }
 
-        withdrawDetails(){}
+        withdrawDetails() {
+        }
 
         public String getNumber() {
             return number;

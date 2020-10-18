@@ -14,16 +14,44 @@
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content" />
 
-        <TextView
+        <LinearLayout
             android:id="@+id/no_data_text_view_withdraw_details"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="NO DATA"
-            android:textSize="30sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_no_referrals_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:text="You have withdrawal details"
+                android:textColor="#D1CFCF"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_horizontal"
+                android:text="As soon as company deposits any money in your account, it's details will show up here"
+                android:textColor="#D1CFCF"
+                android:textSize="18sp"
+                android:layout_marginRight="20dp" />
+
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -66,9 +66,6 @@ public class FragmentDashboard extends Fragment {
         // ACCOUNT STATUS, TOTAL REFERRALS AMOUNT, PAID REFERRALS AMOUNT
         getDetailsFromDatabase();
 
-        // GETTING
-        //getReferralsAmount();
-
         // SETTING INFORMATION DIALOGS ON ALL THE LAYOUTS
         setDialogsOnAllLayouts(view);
 
@@ -229,14 +226,14 @@ public class FragmentDashboard extends Fragment {
     }
 
     private void getDetailsFromDatabase() {
-        databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("users").child(mAuth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
+                    if (snapshot.exists()) {
 
                     AccountDetails accountDetails = snapshot
-                            .child(mAuth.getCurrentUser().getUid())
                             .getValue(AccountDetails.class);
 
                     setValuesToTextViews(
@@ -244,9 +241,10 @@ public class FragmentDashboard extends Fragment {
                             accountDetails.getTotal_withdraw(),
                             accountDetails.getCurrent_balance(),
                             accountDetails.getAccount_status(),
-                            accountDetails.getPaid_referrals(),
-                            accountDetails.getTotal_referrals()
+                            accountDetails.getPaid_referrals()
                     );
+
+                    getReferralsAmount();
 
                 } else {
 
@@ -255,13 +253,14 @@ public class FragmentDashboard extends Fragment {
                             "0.00",
                             "0.00",
                             "Level 1",
-                            "0",
-                            0
+                            "0"
                     );
+                    totalReferralsSubmitted_tv.setText("0");
 
+                    dialog.dismiss();
 
                 }
-                dialog.dismiss();
+
             }
 
             @Override
@@ -269,32 +268,50 @@ public class FragmentDashboard extends Fragment {
                 Log.w(TAG, "onCancelled: " + error.toException());
 
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-
+                dialog.dismiss();
                 //isDone_getDetailsFromDatabase = true;
             }
         });
 
     }
 
-    //private void getReferralsAmount() {
+    private void getReferralsAmount() {
+        databaseReference.child("referrals").child(mAuth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
 
-//        String totalReferrals = utils.getStoredString(getActivity(), TOTAL_REFERRALS_AMOUNT);
-//        //String paidReferrals = utils.getStoredString(getActivity(), PAID_REFERRALS_AMOUNT);
-//
-//        if (totalReferrals.equals("Error"))
-//            totalReferralsSubmitted_tv.setText("0");
-//        else totalReferralsSubmitted_tv.setText(totalReferrals);
-//
-//        isDone_getTotalReferralsFromDatabase = true;
-//
-//    }
+                            if (snapshot.hasChild("total_referrals")) {
+
+                                long counter = (long) snapshot
+                                        .child("total_referrals").getValue();
+
+                                totalReferralsSubmitted_tv.setText(String.valueOf(counter));
+
+
+                            } else totalReferralsSubmitted_tv.setText("0");
+                        } else totalReferralsSubmitted_tv.setText("0");
+
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w(TAG, "onCancelled: database referrals exception", error.toException());
+
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+    }
 
     private void setValuesToTextViews(String total_balance,
                                       String total_withdraw,
                                       String current_balance,
                                       String account_status,
-                                      String paidReferrals,
-                                      int totalReferrals) {
+                                      String paidReferrals) {
         Log.i(TAG, "setValuesToTextViews: ");
 
         totalBalance_tv.setText(total_balance);
@@ -302,7 +319,7 @@ public class FragmentDashboard extends Fragment {
         currentBalance_tv.setText(current_balance);
         accountStatus_tv.setText(account_status);
         paidReferrals_tv.setText(paidReferrals);
-        totalReferralsSubmitted_tv.setText(String.valueOf(totalReferrals));
+
     }
 
     private void initViews(View v) {
@@ -321,18 +338,16 @@ public class FragmentDashboard extends Fragment {
 
         private String total_balance, current_balance,
                 total_withdraw, account_status, paid_referrals;
-        private int total_referrals;
 
         public AccountDetails(String totalBalance, String currentBalance, String totalWithdraw,
                               String accountStatus,
-                              String paidReferrals, int totalReferrals) {
+                              String paidReferrals) {
 
             this.total_balance = totalBalance;
             this.current_balance = currentBalance;
             this.total_withdraw = totalWithdraw;
             this.account_status = accountStatus;
             this.paid_referrals = paidReferrals;
-            this.total_referrals = totalReferrals;
         }
 
         AccountDetails() {
@@ -378,13 +393,6 @@ public class FragmentDashboard extends Fragment {
             this.paid_referrals = paid_referrals;
         }
 
-        public int getTotal_referrals() {
-            return total_referrals;
-        }
-
-        public void setTotal_referrals(int total_referrals) {
-            this.total_referrals = total_referrals;
-        }
     }
 
 //    private static class refUser {

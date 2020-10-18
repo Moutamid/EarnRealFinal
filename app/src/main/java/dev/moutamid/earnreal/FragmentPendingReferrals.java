@@ -108,34 +108,40 @@ public class FragmentPendingReferrals extends Fragment {
 
     private void RefreshReferrals(final View view) {
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("referrals").child(mAuth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot1) {
 
-                if (!snapshot1.hasChild("referrals")) {
+//                if (!snapshot1.hasChild("referrals")) {
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+//
+//                if (!snapshot1) {
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    return;
+//                }
+
+                if (!snapshot1.exists()){
                     noDataTextView.setVisibility(View.VISIBLE);
                     return;
                 }
 
-                if (!snapshot1.child("referrals").hasChild(mAuth.getCurrentUser().getUid())) {
+                if (!snapshot1.hasChild(currentDateString)) {
                     noDataTextView.setVisibility(View.VISIBLE);
                     return;
                 }
 
-                if (!snapshot1.child("referrals").child(mAuth.getCurrentUser().getUid()).hasChild(currentDateString)) {
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
-
-                DataSnapshot snapshot = snapshot1.child("referrals")
-                        .child(mAuth.getCurrentUser().getUid()).child(currentDateString);
+//                DataSnapshot snapshot = snapshot1.child("referrals")
+//                        .child(mAuth.getCurrentUser().getUid()).child(currentDateString);
 
                 // CLEARING ALL THE ITEMS
                 allReferralDetailsList.clear();
                 pendingReferralDetailsList.clear();
 
                 // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot1.child(currentDateString).getChildren()) {
 
                     allReferralDetailsList.add(dataSnapshot.getValue(ReferralDetail.class));
 

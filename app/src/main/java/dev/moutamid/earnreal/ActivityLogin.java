@@ -39,7 +39,7 @@ public class ActivityLogin extends AppCompatActivity {
     private Boolean isOnline = false;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReference;
+//    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,8 @@ public class ActivityLogin extends AppCompatActivity {
         // CHECKING LOGIN STATUS
         checkLoginStatus();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.keepSynced(true);
+//        databaseReference = FirebaseDatabase.getInstance().getReference();
+//        databaseReference.keepSynced(true);
 
         // CHECKING ONLINE STATUS
         checkOnlineStatus();

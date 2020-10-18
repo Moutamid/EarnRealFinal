@@ -4,6 +4,7 @@ package dev.moutamid.earnreal;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -27,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.krishna.securetimer.SecureTimer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MainActivity";
 
     private static final String USER_EMAIL = "userEmail";
 
@@ -69,16 +71,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void checkBanStatus() {
 
-        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("users").child(mAuth.getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.hasChild(mAuth.getCurrentUser().getUid())) {
+                if (snapshot.exists()) {
 
-                    if (snapshot.child(mAuth.getCurrentUser().getUid()).hasChild("isBan")) {
-                        if (snapshot.child(mAuth.getCurrentUser().getUid())
-                                .child("isBan")
-                                .getValue(Boolean.class)) {
+                    if (snapshot.hasChild("isBan")) {
+                        if (snapshot.child("isBan").getValue(Boolean.class)) {
 
                             utils.showDialog(MainActivity.this,
                                     "",
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.w(TAG, "onCancelled: ", error.toException());
             }
         });
     }

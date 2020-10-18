@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.BaseInputConnection;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -47,7 +49,7 @@ public class FragmentReferrals extends Fragment {
     private static final String CURRENT_DATE_STRING = "current_date_string";
 
     private boolean isOnline = false;
-    private boolean isNmbrValid = true;
+    //private boolean isNmbrValid = true;
     private TextView dateTextView;
 
     private DatabaseReference databaseReference;
@@ -147,11 +149,11 @@ public class FragmentReferrals extends Fragment {
 
         TextView closeBtn = dialog.findViewById(R.id.close_text_view_btn_dialog_ad_referral);
         final EditText nameTv = (EditText) dialog.findViewById(R.id.name_edit_text_dialog_ad_referral);
-        final EditText numberTv = (EditText) dialog.findViewById(R.id.number_edit_text_dialog_ad_referral);
+        final EditText numbereditText = (EditText) dialog.findViewById(R.id.number_edit_text_dialog_ad_referral);
         final EditText cityTv = (EditText) dialog.findViewById(R.id.city_name_edit_text_dialog_ad_referral);
         Button submitBtn = dialog.findViewById(R.id.submit_btn_dialog_ad_referral);
 
-        numberTv.addTextChangedListener(phoneNmbrEditTextWatcherListener(numberTv));
+        numbereditText.addTextChangedListener(phoneNmbrEditTextWatcherListener(numbereditText));
 
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,9 +172,9 @@ public class FragmentReferrals extends Fragment {
                     return;
                 }
 
-                if (numberTv.getText().toString().isEmpty()) {
-                    numberTv.setError("Number is empty!");
-                    numberTv.requestFocus();
+                if (numbereditText.getText().toString().isEmpty()) {
+                    numbereditText.setError("Number is empty!");
+                    numbereditText.requestFocus();
                     return;
                 }
 
@@ -182,15 +184,15 @@ public class FragmentReferrals extends Fragment {
                     return;
                 }
 
-                if (!isNmbrValid) {
-                    numberTv.setError("Number is invalid!");
-                    numberTv.requestFocus();
-                    return;
-                }
+//                if (!isNmbrValid) {
+//                    numbereditText.setError("Number is invalid!");
+//                    numbereditText.requestFocus();
+//                    return;
+//                }
 
-                if (numberTv.getText().toString().length() != 11) {
-                    numberTv.setError("Minimum length should be 11!");
-                    numberTv.requestFocus();
+                if (numbereditText.getText().toString().length() != 11) {
+                    numbereditText.setError("Minimum length should be 11!");
+                    numbereditText.requestFocus();
                     return;
                 }
 
@@ -205,7 +207,7 @@ public class FragmentReferrals extends Fragment {
                 dialog1.setMessage("Uploading...");
                 dialog1.show();
 
-                uploadReferralDetailToDataBase(dialog, dialog1, nameTv, numberTv, cityTv);
+                uploadReferralDetailToDataBase(dialog, dialog1, nameTv, numbereditText, cityTv);
 
             }
         });
@@ -285,36 +287,11 @@ public class FragmentReferrals extends Fragment {
                 } else {
                     dialog1.dismiss();
                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.i(TAG, "onComplete: task failed " + task.getException());
+                    Log.i(TAG, "onComplete: task failed " + task.getException().getMessage());
+
                 }
             }
         });
-
-//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot1) {
-//
-//                if (!snapshot1.hasChild("referrals"))
-//                    return;
-//                if (!snapshot1.child("referrals").hasChild(mAuth.getCurrentUser().getUid()))
-//                    return;
-//                if (!snapshot1.child("referrals").child(mAuth.getCurrentUser().getUid()).hasChild(currentDateString))
-//                    return;
-//
-//                DataSnapshot snapshot = snapshot1.child("referrals").child(mAuth.getCurrentUser().getUid()).child(currentDateString);
-//
-//
-////                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, totalReferralsStr);
-////                    utils.storeString(getActivity(), PAID_REFERRALS_AMOUNT, paidReferralsStr);
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
     }
 
@@ -326,35 +303,32 @@ public class FragmentReferrals extends Fragment {
 
     private void updateCounter() {
 
-        databaseReference.child("users")
-                .child(mAuth.getCurrentUser().getUid())
+        databaseReference.child("referrals").child(mAuth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if (!snapshot.exists())
 
                         if (snapshot.hasChild("total_referrals")) {
 
                             long counter = (long) snapshot.child("total_referrals").getValue();
 
                             databaseReference
-                                    .child("users")
+                                    .child("referrals")
                                     .child(mAuth.getCurrentUser().getUid())
                                     .child("total_referrals")
                                     .setValue(++counter);
-
-                            //utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, String.valueOf(counter));
 
                         } else {
 
                             long nmbr = 1;
 
                             databaseReference
-                                    .child("users")
+                                    .child("referrals")
                                     .child(mAuth.getCurrentUser().getUid())
                                     .child("total_referrals")
                                     .setValue(nmbr);
-
-                            //utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, "1");
 
                         }
 
@@ -362,7 +336,8 @@ public class FragmentReferrals extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Log.w(TAG, "onCancelled: total counter", error.toException());
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -387,32 +362,42 @@ public class FragmentReferrals extends Fragment {
 
                 if (nmbr.length() == 1)
                     if (!nmbr.substring(0, 1).equals("0")) {
-                        phoneNmbrEditText.setError("Number should start from 0!");
-                        isNmbrValid = false;
+
+                        removeCharacter(phoneNmbrEditText);
+                        //phoneNmbrEditText.setError("Number should start from 0!");
+                        Toast.makeText(getActivity(), "Number should start from 0!", Toast.LENGTH_SHORT).show();
+                        //isNmbrValid = false;
                         return;
                     }
                 // SECOND CHARACTER OF THE NUMBER IS NOT 3
                 if (nmbr.length() == 2)
                     if (!nmbr.substring(0, 2).equals("03")) {
-                        phoneNmbrEditText.setError("Number should start like 03...!");
-                        isNmbrValid = false;
+
+                        removeCharacter(phoneNmbrEditText);
+                        Toast.makeText(getActivity(), "Number should start like 03...!", Toast.LENGTH_SHORT).show();
+                        //phoneNmbrEditText.setError("Number should start like 03...!");
+//                        isNmbrValid = false;
                         return;
                     }
 
-                // THIRD CHARACTER OF THE NUMBER IS 6, 7, 8 OR 9 WHICH ARE INVALID
-                if (nmbr.length() >= 3)
+                // THIRD CHARACTER OF THE NUMBER IS 6, 7, 8, 9 WHICH ARE INVALID
+                if (nmbr.length() >= 3){
                     if (nmbr.substring(0, 3).equals("036")
                             || nmbr.substring(0, 3).equals("037")
                             || nmbr.substring(0, 3).equals("038")
                             || nmbr.substring(0, 3).equals("039")
+                            ) {
 
-                    ) {
-                        phoneNmbrEditText.setError("Number is invalid!");
-                        isNmbrValid = false;
-                        return;
+                        removeCharacter(phoneNmbrEditText);
+                        Toast.makeText(getActivity(), "Number is invalid!", Toast.LENGTH_SHORT).show();
+                        //phoneNmbrEditText.setError("Number is invalid!");
+                        //isNmbrValid = false;
+                        //return;
                     }
 
-                isNmbrValid = true;
+            }
+                //isNmbrValid = true;
+
             }
 
             @Override
@@ -420,6 +405,13 @@ public class FragmentReferrals extends Fragment {
 
             }
         };
+
+    }
+
+    private void removeCharacter(EditText edittext){
+
+        BaseInputConnection textFieldConnection = new BaseInputConnection(edittext, true);
+        textFieldConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
 
     }
 
