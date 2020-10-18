@@ -20,38 +20,39 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_centerInParent="true"
         android:gravity="center"
-        android:layout_centerInParent="true">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/userNameLoginLayout"
             android:layout_width="250dp"
-            android:padding="5dp"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_background"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <ImageView
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/icon_email"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_phone_number" />
 
             <EditText
                 android:id="@+id/number_login_editText"
                 android:layout_width="187dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:hint="Number"
+                android:background="@color/white"
+                android:hint="Phone-number"
                 android:inputType="number"
                 android:textColor="@color/darkBlue"
                 android:textColorHint="@color/greyishblue"
-                android:layout_marginStart="5dp"
-                android:textSize="13sp"
-                android:background="@color/white" />
+                android:textCursorDrawable="@color/skyBlue"
+                android:textSize="13sp" />
 
         </LinearLayout>
 
@@ -60,31 +61,31 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:padding="5dp"
             android:background="@drawable/edit_text_background"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <ImageView
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/icon_password"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/icon_password" />
 
             <EditText
                 android:id="@+id/password_login_editText"
                 android:layout_width="187dp"
                 android:layout_height="35dp"
-                android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/white"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:background="@color/white"
                 android:textColor="@color/darkBlue"
                 android:textColorHint="@color/greyishblue"
-                android:textSize="13sp"
-                />
+                android:textCursorDrawable="@color/skyBlue"
+                android:textSize="13sp" />
 
         </LinearLayout>
 
