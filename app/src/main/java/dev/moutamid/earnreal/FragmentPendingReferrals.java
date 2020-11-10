@@ -23,15 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FragmentPendingReferrals extends Fragment {
     private static final String TAG = "FragmentPendingReferral";
 
-    private static final String CURRENT_DATE_STRING = "current_date_string";
-    private Utils utils = new Utils();
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    private String currentDateString;
+
     private LinearLayout noDataTextView;
 
     private ArrayList<ReferralDetail> allReferralDetailsList = new ArrayList<>();
@@ -94,12 +93,7 @@ public class FragmentPendingReferrals extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        currentDateString = utils.getStoredString(getActivity(), CURRENT_DATE_STRING);
-
         noDataTextView = view.findViewById(R.id.no_data_text_view_pending_referrals);
-
-        if (currentDateString.equals("Error"))
-            currentDateString = utils.getDate(getActivity());
 
         RefreshReferrals(view);
 
@@ -113,35 +107,16 @@ public class FragmentPendingReferrals extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot1) {
 
-//                if (!snapshot1.hasChild("referrals")) {
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    return;
-//                }
-//
-//                if (!snapshot1) {
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    return;
-//                }
-
                 if (!snapshot1.exists()){
                     noDataTextView.setVisibility(View.VISIBLE);
                     return;
                 }
 
-                if (!snapshot1.hasChild(currentDateString)) {
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
-
-//                DataSnapshot snapshot = snapshot1.child("referrals")
-//                        .child(mAuth.getCurrentUser().getUid()).child(currentDateString);
-
-                // CLEARING ALL THE ITEMS
                 allReferralDetailsList.clear();
                 pendingReferralDetailsList.clear();
 
                 // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-                for (DataSnapshot dataSnapshot : snapshot1.child(currentDateString).getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot1.getChildren()) {
 
                     allReferralDetailsList.add(dataSnapshot.getValue(ReferralDetail.class));
 
@@ -155,11 +130,9 @@ public class FragmentPendingReferrals extends Fragment {
 
                 }
 
+                Collections.reverse(pendingReferralDetailsList);
+
                 initRecyclerView(view);
-
-//                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, totalReferralsStr);
-//                    utils.storeString(getActivity(), PAID_REFERRALS_AMOUNT, paidReferralsStr);
-
 
             }
 

@@ -17,7 +17,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background" />
+        android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,14 +37,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Phone-number"
+        android:text="User name"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
         android:textSize="14sp"
         android:textColor="@android:color/black"/>
 
-<!--    android:id="@+id/nav_header_phone_nmbr_id"-->
+
     <TextView
-        android:visibility="gone"
+        android:id="@+id/nav_header_phone_nmbr_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="4dp"

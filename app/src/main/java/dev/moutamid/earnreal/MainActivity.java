@@ -25,7 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.krishna.securetimer.SecureTimer;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
@@ -57,14 +56,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         checkBanStatus();
 
-        //checkAppUpdateStatus();
+        //TODO: checkAppUpdateStatus();
 
         initializeViews();
         toggleDrawer();
         initializeDefaultFragment(savedInstanceState, 0);
         //setUrduSwitchListener();
-
-        SecureTimer.with(getApplicationContext()).initialize();
 
 
     }
@@ -72,45 +69,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void checkBanStatus() {
 
         databaseReference.child("users").child(mAuth.getCurrentUser().getUid())
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()) {
+                        if (snapshot.exists()) {
 
-                    if (snapshot.hasChild("isBan")) {
-                        if (snapshot.child("isBan").getValue(Boolean.class)) {
+                            if (snapshot.hasChild("isBan")) {
+                                if (snapshot.child("isBan").getValue(Boolean.class)) {
 
-                            utils.showDialog(MainActivity.this,
-                                    "",
-                                    "Your account is temporarily disabled! Contact Care department for furthur details.",
-                                    "",
-                                    "",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    },
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    },
-                                    false
-                            );
+                                    utils.showDialog(MainActivity.this,
+                                            "",
+                                            "Your account is temporarily disabled! Contact Care department (03123456789) for further details.",
+                                            "",
+                                            "",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                }
+                                            },
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                }
+                                            },
+                                            false
+                                    );
+
+                                }
+                            }
+
+                            // SETTING EMAIL AND PHONE NUMBER IN THE HEADER
+                            setHeaderDetails(snapshot.child("fullName").getValue(String.class));
 
                         }
+
                     }
 
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "onCancelled: ", error.toException());
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w(TAG, "onCancelled: ", error.toException());
+                    }
+                });
     }
 
     private boolean checkLoginStatus() {
@@ -140,22 +140,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         //urduSwitch = (SwitchCompat) navigationView.getMenu().findItem(R.id.nav_urdu_id).getActionView();
 
-        // SETTING EMAIL AND PHONE NUMBER IN THE HEADER
-        setHeaderDetails();
     }
 
-    private void setHeaderDetails() {
+    private void setHeaderDetails(String name) {
         View header = navigationView.getHeaderView(0);
 
         //private SwitchCompat urduSwitch;
-        TextView nav_email = (TextView) header.findViewById(R.id.nav_header_user_name_id);
-        //nav_phone_number = (TextView) header.findViewById(R.id.nav_header_phone_nmbr_id);
+        TextView nav_name = (TextView) header.findViewById(R.id.nav_header_user_name_id);
+        TextView nav_phone_number = (TextView) header.findViewById(R.id.nav_header_phone_nmbr_id);
 
-        String email = utils.getStoredString(MainActivity.this, USER_EMAIL);
-        //String number = utils.getStoredString(MainActivity.this, USER_NUMBER);
+        String number = utils.getStoredString(MainActivity.this, USER_EMAIL);
+//        String name = utils.getStoredString(MainActivity.this, USER_NUMBER);
 
-        nav_email.setText(email.substring(0, 11));
-        //nav_phone_number.setText(number);
+        nav_phone_number.setText(number.substring(0, 11));
+        nav_name.setText(name);
 
     }
 
@@ -194,24 +192,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toolbar.setTitle("Dashboard");
                 closeDrawer();
                 break;
-//            case R.id.nav_upgrade_id:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentUpgrade())
-//                        .commit();
-//                toolbar.setTitle("EarnReal - Upgrade");
-//                closeDrawer();
-//                break;
-//            case R.id.nav_premium_ads_id:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentPremiumAds())
-//                        .commit();
-//                toolbar.setTitle("EarnReal - Premium Ads");
-//                closeDrawer();
-//                break;
-//            case R.id.nav_daily_ads_id:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentDailyAds())
-//                        .commit();
-//                toolbar.setTitle("EarnReal - Daily Ads");
-//                closeDrawer();
-//                break;
             case R.id.nav_referrals_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentReferrals())
                         .commit();
@@ -224,12 +204,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toolbar.setTitle("Withdraw details");
                 closeDrawer();
                 break;
-//            case R.id.nav_payment_proof_id:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentPaymentProof())
-//                        .commit();
-//                toolbar.setTitle("EarnReal - Payment proof");
-//                closeDrawer();
-//                break;
             case R.id.nav_privacy_policy_id:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentPrivacyPolicy())
                         .commit();
@@ -242,16 +216,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 toolbar.setTitle("Terms of services");
                 closeDrawer();
                 break;
-            case R.id.nav_contact_us_id:
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentContactUs())
-                        .commit();
-                toolbar.setTitle("Contact us");
-                closeDrawer();
-                break;
-//            case R.id.nav_help_id:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentHelp())
+//           TODO: UN-Comment THIS LINE case R.id.nav_contact_us_id:
+//                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout_id, new FragmentContactUs())
 //                        .commit();
-//                toolbar.setTitle("EarnReal - Help");
+//                toolbar.setTitle("Contact us");
 //                closeDrawer();
 //                break;
             case R.id.nav_logout_id:

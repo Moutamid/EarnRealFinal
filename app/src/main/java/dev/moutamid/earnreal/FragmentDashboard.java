@@ -22,26 +22,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 public class FragmentDashboard extends Fragment {
     private static final String TAG = "FragmentDashboard";
 
-    private static final String TOTAL_REFERRALS_AMOUNT = "total_referrals_amount";
-    private static final String PAID_REFERRALS_AMOUNT = "paid_referrals_amount";
-
-    //private ArrayList<refUser> refUsersList = new ArrayList<>();
-    private ArrayList<String> paid_membersList = new ArrayList<>();
-    private TextView totalBalance_tv, totalWithdraw_tv, currentBalance_tv, accountStatus_tv;
+    private TextView totalBalance_tv, totalWithdraw_tv, currentBalance_tv;
     private TextView totalReferralsSubmitted_tv, paidReferrals_tv;
     private DatabaseReference databaseReference;
 
     private FirebaseAuth mAuth;
     private Utils utils = new Utils();
 
-    //private boolean isDone_getDetailsFromDatabase = false;
     private ProgressDialog dialog;
-    //private Handler handler;
 
     @Nullable
     @Override
@@ -59,8 +50,6 @@ public class FragmentDashboard extends Fragment {
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Loading details...");
         dialog.show();
-        //handler = new Handler();
-        //startCheckingBooleanValues();
 
         // GETTING TOTAL BALANCE, TOTAL WITHDRAW, CURRENT BALANCE,
         // ACCOUNT STATUS, TOTAL REFERRALS AMOUNT, PAID REFERRALS AMOUNT
@@ -69,51 +58,12 @@ public class FragmentDashboard extends Fragment {
         // SETTING INFORMATION DIALOGS ON ALL THE LAYOUTS
         setDialogsOnAllLayouts(view);
 
-//        // TEST DATA
-//        AccountDetails details = new AccountDetails(
-//                "0",
-//                "0",
-//                "0",
-//                "Level 1",
-//                "0"
-//        );
-//        databaseReference.child("users")
-//                .child(mAuth.getCurrentUser().getUid()).setValue(details);
-
         return view;
     }
 
-//    Runnable booleanCheckerRunnable = new Runnable() {
-//        @Override
-//        public void run() {
-//            try {
-//                checkBoolean();
-//            } finally {
-//                handler.postDelayed(booleanCheckerRunnable, 1000);
-//            }
-//        }
-//    };
-
-//    private void startCheckingBooleanValues() {
-//        booleanCheckerRunnable.run();
-//    }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//
-//        handler.removeCallbacks(booleanCheckerRunnable);
-//    }
-
-//    private void checkBoolean() {
-//        if (isDone_getDetailsFromDatabase && isDone_getTotalReferralsFromDatabase) {
-//
-//            handler.removeCallbacks(booleanCheckerRunnable);
-//            dialog.dismiss();
-//        }
-//    }
 
     private void setDialogsOnAllLayouts(View v) {
+        // TODO: Update messages below
         LinearLayout totalbalancelayout = v.findViewById(R.id.total_balance_layout_dashboard);
         LinearLayout totalwithdrawlayout = v.findViewById(R.id.total_withdraw_layout_dashboard);
         LinearLayout currentbalancelayout = v.findViewById(R.id.current_balance_layout_dashboard);
@@ -125,7 +75,8 @@ public class FragmentDashboard extends Fragment {
             @Override
             public void onClick(View view) {
                 utils.showDialog(getActivity(), "",
-                        "This field will show you all the money you have earned so far.", "Ok", "", new DialogInterface.OnClickListener() {
+                        "This field will show you all the money you have earned so far.",
+                        "Ok", "", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -142,7 +93,8 @@ public class FragmentDashboard extends Fragment {
             @Override
             public void onClick(View view) {
                 utils.showDialog(getActivity(), "",
-                        "This field will show you all the money you have received so far.", "Ok", "", new DialogInterface.OnClickListener() {
+                        "This field will show you all the money you have received so far.",
+                        "Ok", "", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -159,7 +111,8 @@ public class FragmentDashboard extends Fragment {
             @Override
             public void onClick(View view) {
                 utils.showDialog(getActivity(), "",
-                        "This field will show you the money you have right now in your account. \nYou can withdraw this money at any time.", "Ok", "", new DialogInterface.OnClickListener() {
+                        "This field will show you the money you have right now in your account. " +
+                                "\nYou can withdraw this money at any time.", "Ok", "", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -176,7 +129,10 @@ public class FragmentDashboard extends Fragment {
             @Override
             public void onClick(View view) {
                 utils.showDialog(getActivity(), "",
-                        "This field will show you your account status. \nYou will reach level 2 after having at least 25 paid referrals. Level 2 will give you 60% commission on every paid referral.", "Ok", "", new DialogInterface.OnClickListener() {
+                        "This field will show you your account status. " +
+                                "\nYou will reach level 2 after having at least 25 paid referrals. " +
+                                "Level 2 will add you to our communicators list and will provide" +
+                                "balance facility.", "Ok", "", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -193,7 +149,7 @@ public class FragmentDashboard extends Fragment {
             @Override
             public void onClick(View view) {
                 utils.showDialog(getActivity(), "",
-                        "This field will show you the amount of all the referrals", "Ok", "", new DialogInterface.OnClickListener() {
+                        "This field will show you the amount of all the referrals you've submitted so far.", "Ok", "", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -228,69 +184,63 @@ public class FragmentDashboard extends Fragment {
     private void getDetailsFromDatabase() {
         databaseReference.child("users").child(mAuth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    if (snapshot.exists()) {
+                        if (snapshot.exists()) {
 
-                    AccountDetails accountDetails = snapshot
-                            .getValue(AccountDetails.class);
+                            AccountDetails accountDetails = snapshot
+                                    .getValue(AccountDetails.class);
+                            //long counter = (long) snapshot.child("total_referrals").getValue();
+                            setValuesToTextViews(
+                                    accountDetails.getTotalBalance(),
+                                    accountDetails.getTotalWithdraw(),
+                                    accountDetails.getCurrentBalance(),
+                                    //accountDetails.getAccount_status(),
+                                    accountDetails.getPaidReferrals()
+                            );
 
-                    setValuesToTextViews(
-                            accountDetails.getTotal_balance(),
-                            accountDetails.getTotal_withdraw(),
-                            accountDetails.getCurrent_balance(),
-                            accountDetails.getAccount_status(),
-                            accountDetails.getPaid_referrals()
-                    );
+                            getTotalReferralsAmount();
 
-                    getReferralsAmount();
+                        } else {
 
-                } else {
+                            setValuesToTextViews(
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                            );
+                            totalReferralsSubmitted_tv.setText("0");
 
-                    setValuesToTextViews(
-                            "0.00",
-                            "0.00",
-                            "0.00",
-                            "Level 1",
-                            "0"
-                    );
-                    totalReferralsSubmitted_tv.setText("0");
+                            dialog.dismiss();
 
-                    dialog.dismiss();
+                        }
 
-                }
+                    }
 
-            }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w(TAG, "onCancelled: " + error.toException());
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "onCancelled: " + error.toException());
-
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                //isDone_getDetailsFromDatabase = true;
-            }
-        });
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        //isDone_getDetailsFromDatabase = true;
+                    }
+                });
 
     }
 
-    private void getReferralsAmount() {
+    private void getTotalReferralsAmount() {
         databaseReference.child("referrals").child(mAuth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
 
-                            if (snapshot.hasChild("total_referrals")) {
+                            long count = snapshot.getChildrenCount();
 
-                                long counter = (long) snapshot
-                                        .child("total_referrals").getValue();
+                            totalReferralsSubmitted_tv.setText(String.valueOf(count));
 
-                                totalReferralsSubmitted_tv.setText(String.valueOf(counter));
-
-
-                            } else totalReferralsSubmitted_tv.setText("0");
                         } else totalReferralsSubmitted_tv.setText("0");
 
                         dialog.dismiss();
@@ -307,18 +257,17 @@ public class FragmentDashboard extends Fragment {
 
     }
 
-    private void setValuesToTextViews(String total_balance,
-                                      String total_withdraw,
-                                      String current_balance,
-                                      String account_status,
-                                      String paidReferrals) {
+    private void setValuesToTextViews(long total_balance,
+                                      long total_withdraw,
+                                      long current_balance,
+                                      long paidReferrals) {//String account_status,
         Log.i(TAG, "setValuesToTextViews: ");
 
-        totalBalance_tv.setText(total_balance);
-        totalWithdraw_tv.setText(total_withdraw);
-        currentBalance_tv.setText(current_balance);
-        accountStatus_tv.setText(account_status);
-        paidReferrals_tv.setText(paidReferrals);
+        totalBalance_tv.setText(String.valueOf(total_balance));
+        totalWithdraw_tv.setText(String.valueOf(total_withdraw));
+        currentBalance_tv.setText(String.valueOf(current_balance));
+        //accountStatus_tv.setText(account_status);
+        paidReferrals_tv.setText(String.valueOf(paidReferrals));
 
     }
 
@@ -328,7 +277,7 @@ public class FragmentDashboard extends Fragment {
         totalBalance_tv = v.findViewById(R.id.total_balance_tv_dashboard);
         totalWithdraw_tv = v.findViewById(R.id.total_withdraw_tv_dashboard);
         currentBalance_tv = v.findViewById(R.id.current_balance_tv_dashboard);
-        accountStatus_tv = v.findViewById(R.id.account_status_tv_dashboard);
+        //accountStatus_tv = v.findViewById(R.id.account_status_level_tv_dashboard);
         totalReferralsSubmitted_tv = v.findViewById(R.id.total_referrals_tv_dashboard);
         paidReferrals_tv = v.findViewById(R.id.paid_members_tv_dashboard);
 
@@ -336,95 +285,50 @@ public class FragmentDashboard extends Fragment {
 
     private static class AccountDetails {
 
-        private String total_balance, current_balance,
-                total_withdraw, account_status, paid_referrals;
+        private long totalBalance, currentBalance,
+                totalWithdraw, paidReferrals;
 
-        public AccountDetails(String totalBalance, String currentBalance, String totalWithdraw,
-                              String accountStatus,
-                              String paidReferrals) {
+        public AccountDetails(long totalBalance, long currentBalance, long totalWithdraw, long paidReferrals) {
+            this.totalBalance = totalBalance;
+            this.currentBalance = currentBalance;
+            this.totalWithdraw = totalWithdraw;
+            this.paidReferrals = paidReferrals;
+        }
 
-            this.total_balance = totalBalance;
-            this.current_balance = currentBalance;
-            this.total_withdraw = totalWithdraw;
-            this.account_status = accountStatus;
-            this.paid_referrals = paidReferrals;
+        public long getTotalBalance() {
+            return totalBalance;
+        }
+
+        public void setTotalBalance(long totalBalance) {
+            this.totalBalance = totalBalance;
+        }
+
+        public long getCurrentBalance() {
+            return currentBalance;
+        }
+
+        public void setCurrentBalance(long currentBalance) {
+            this.currentBalance = currentBalance;
+        }
+
+        public long getTotalWithdraw() {
+            return totalWithdraw;
+        }
+
+        public void setTotalWithdraw(long totalWithdraw) {
+            this.totalWithdraw = totalWithdraw;
+        }
+
+        public long getPaidReferrals() {
+            return paidReferrals;
+        }
+
+        public void setPaidReferrals(long paidReferrals) {
+            this.paidReferrals = paidReferrals;
         }
 
         AccountDetails() {
         }
-
-        public String getTotal_balance() {
-            return total_balance;
-        }
-
-        public void setTotal_balance(String total_balance) {
-            this.total_balance = total_balance;
-        }
-
-        public String getCurrent_balance() {
-            return current_balance;
-        }
-
-        public void setCurrent_balance(String current_balance) {
-            this.current_balance = current_balance;
-        }
-
-        public String getTotal_withdraw() {
-            return total_withdraw;
-        }
-
-        public void setTotal_withdraw(String total_withdraw) {
-            this.total_withdraw = total_withdraw;
-        }
-
-        public String getAccount_status() {
-            return account_status;
-        }
-
-        public void setAccount_status(String account_status) {
-            this.account_status = account_status;
-        }
-
-        public String getPaid_referrals() {
-            return paid_referrals;
-        }
-
-        public void setPaid_referrals(String paid_referrals) {
-            this.paid_referrals = paid_referrals;
-        }
-
     }
-
-//    private static class refUser {
-//
-//        private String email;
-//        private boolean paid;
-//
-//        refUser() {
-//
-//        }
-//
-//        public refUser(String email, boolean paid) {
-//            this.email = email;
-//            this.paid = paid;
-//        }
-//
-//        public boolean isPaid() {
-//            return paid;
-//        }
-//
-//        public void setPaid(boolean paid) {
-//            this.paid = paid;
-//        }
-//
-//        public String getEmail() {
-//            return email;
-//        }
-//
-//        public void setEmail(String email) {
-//            this.email = email;
-//        }
-//
-//    }
 
 }

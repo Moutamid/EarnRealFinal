@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class ActivityWelcome extends AppCompatActivity {
 
@@ -16,6 +18,11 @@ public class ActivityWelcome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            finish();
+            startActivity(new Intent(ActivityWelcome.this, MainActivity.class));
+        }
 
         loginBtn = findViewById(R.id.loginBtn_welcome);
 

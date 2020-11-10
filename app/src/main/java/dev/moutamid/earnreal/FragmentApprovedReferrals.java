@@ -27,11 +27,11 @@ import java.util.ArrayList;
 public class FragmentApprovedReferrals extends Fragment {
     private static final String TAG = "FragmentApprovedReferra";
 
-    private static final String CURRENT_DATE_STRING = "current_date_string";
+    //private static final String CURRENT_DATE_STRING = "current_date_string";
     private Utils utils = new Utils();
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    private String currentDateString;
+    //private String currentDateString;
     private LinearLayout noDataTextView;
 
     private ArrayList<ReferralDetail> allReferralDetailsList = new ArrayList<>();
@@ -95,12 +95,12 @@ public class FragmentApprovedReferrals extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        currentDateString = utils.getStoredString(getActivity(), CURRENT_DATE_STRING);
+        //currentDateString = utils.getStoredString(getActivity(), CURRENT_DATE_STRING);
 
         noDataTextView = view.findViewById(R.id.no_data_text_view_approved_referrals);
 
-        if (currentDateString.equals("Error"))
-            currentDateString = utils.getDate(getActivity());
+//        if (currentDateString.equals("Error"))
+//            currentDateString = utils.getDate(getActivity());
 
         RefreshApprovedReferrals(view);
 
@@ -130,10 +130,10 @@ public class FragmentApprovedReferrals extends Fragment {
                     return;
                 }
 
-                if (!snapshot1.hasChild(currentDateString)) {
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
+//                if (!snapshot1.hasChild(currentDateString)) {
+//                    noDataTextView.setVisibility(View.VISIBLE);
+//                    return;
+//                }
 
 //                DataSnapshot snapshot = snapshot1.child("referrals")
 //                        .child(mAuth.getCurrentUser().getUid());
@@ -143,7 +143,9 @@ public class FragmentApprovedReferrals extends Fragment {
                 approvedReferralDetailsList.clear();
 
                 // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-                for (DataSnapshot dataSnapshot : snapshot1.child(currentDateString).getChildren()) {
+                for (DataSnapshot dataSnapshot : snapshot1
+//                        .child(currentDateString)
+                        .getChildren()) {
 
                     allReferralDetailsList.add(dataSnapshot.getValue(ReferralDetail.class));
 

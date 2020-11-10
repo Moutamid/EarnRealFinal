@@ -3,7 +3,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_background"
+    android:background="@drawable/bg_dialog"
     android:orientation="vertical">
 
     <TextView
@@ -64,7 +64,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/dialog_work_done_button_bg"
+        android:background="@drawable/bg_dialog_work_done_button"
         android:gravity="center"
         android:text="Okay"
         android:textColor="@color/white" />

@@ -23,15 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FragmentPaidReferrals extends Fragment {
     private static final String TAG = "FragmentPaidReferrals";
 
-    private static final String CURRENT_DATE_STRING = "current_date_string";
-    private Utils utils = new Utils();
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    private String currentDateString;
+
     private LinearLayout noDataTextView;
 
     private ArrayList<ReferralDetail> allReferralDetailsList = new ArrayList<>();
@@ -94,12 +93,7 @@ public class FragmentPaidReferrals extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        currentDateString = utils.getStoredString(getActivity(), CURRENT_DATE_STRING);
-
         noDataTextView = view.findViewById(R.id.no_data_text_view_paid_referrals);
-
-        if (currentDateString.equals("Error"))
-            currentDateString = utils.getDate(getActivity());
 
         RefreshPaidReferrals(view);
 
@@ -111,65 +105,44 @@ public class FragmentPaidReferrals extends Fragment {
 
         databaseReference.child("referrals").child(mAuth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot1) {
-//
-//                if (!snapshot1.hasChild("referrals")) {
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    return;
-//                }
-//
-//                if (!snapshot1) {
-//                    noDataTextView.setVisibility(View.VISIBLE);
-//                    return;
-//                }
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot1) {
 
-                if (!snapshot1.exists()){
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
+                        if (!snapshot1.exists()) {
+                            noDataTextView.setVisibility(View.VISIBLE);
+                            return;
+                        }
 
-                if (!snapshot1.hasChild(currentDateString)) {
-                    noDataTextView.setVisibility(View.VISIBLE);
-                    return;
-                }
+                        allReferralDetailsList.clear();
+                        paidReferralDetailsList.clear();
 
-//                DataSnapshot snapshot = snapshot1.child("referrals")
-//                        .child(mAuth.getCurrentUser().getUid());
+                        // LOOPING THROUGH ALL THE CHILDREN OF TEAM
+                        for (DataSnapshot dataSnapshot : snapshot1.getChildren()) {
 
-                // CLEARING ALL THE ITEMS
-                allReferralDetailsList.clear();
-                paidReferralDetailsList.clear();
+                            allReferralDetailsList.add(dataSnapshot.getValue(ReferralDetail.class));
 
-                // LOOPING THROUGH ALL THE CHILDREN OF TEAM
-                for (DataSnapshot dataSnapshot : snapshot1.child(currentDateString).getChildren()) {
+                        }
 
-                    allReferralDetailsList.add(dataSnapshot.getValue(ReferralDetail.class));
+                        // EXTRACTING OUT ONLY THE PENDING REFERRALS AND SHOWING THE RECYCLER VIEW
+                        for (int i = 0; i <= allReferralDetailsList.size() - 1; i++) {
 
-                }
+                            if (allReferralDetailsList.get(i).getRemarks().equals("paid"))
+                                paidReferralDetailsList.add(allReferralDetailsList.get(i));
 
-                // EXTRACTING OUT ONLY THE PENDING REFERRALS AND SHOWING THE RECYCLER VIEW
-                for (int i = 0; i <= allReferralDetailsList.size() - 1; i++) {
+                        }
 
-                    if (allReferralDetailsList.get(i).getRemarks().equals("paid"))
-                        paidReferralDetailsList.add(allReferralDetailsList.get(i));
+                        Collections.reverse(paidReferralDetailsList);
 
-                }
+                        initRecyclerView(view);
 
-                initRecyclerView(view);
+                    }
 
-//                    utils.storeString(getActivity(), TOTAL_REFERRALS_AMOUNT, totalReferralsStr);
-//                    utils.storeString(getActivity(), PAID_REFERRALS_AMOUNT, paidReferralsStr);
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "onCancelled: ", error.toException());
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w(TAG, "onCancelled: ", error.toException());
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 

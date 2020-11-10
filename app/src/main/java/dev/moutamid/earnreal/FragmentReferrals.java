@@ -1,6 +1,5 @@
 package dev.moutamid.earnreal;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -15,14 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.BaseInputConnection;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -42,15 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 public class FragmentReferrals extends Fragment {
     private static final String TAG = "FragmentReferrals";
 
-    private static final String PAID_STATUS = "paidStatus";
-    private static final String USER_ID = "userReferralCode";
-    private static final String TOTAL_REFERRALS_AMOUNT = "total_referrals_amount";
-    private static final String PAID_REFERRALS_AMOUNT = "paid_referrals_amount";
-    private static final String CURRENT_DATE_STRING = "current_date_string";
-
     private boolean isOnline = false;
-    //private boolean isNmbrValid = true;
-    private TextView dateTextView;
 
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
@@ -71,66 +60,14 @@ public class FragmentReferrals extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        //
-//        // IF USER IS PAID
-//        if (utils.getStoredBoolean(getActivity(), PAID_STATUS)) {
-//
-//            dialog = new ProgressDialog(getActivity());
-//            dialog.setMessage("Loading team members...");
-//            dialog.show();
-
-//            LinearLayout notPaidLayout = view.findViewById(R.id.not_paid_layout_team);
-//            ScrollView paiLayout = view.findViewById(R.id.paid_layout_fragment_team);
-
-//            notPaidLayout.setVisibility(View.GONE);
-//            paiLayout.setVisibility(View.VISIBLE);
-
-//            mAuth = FirebaseAuth.getInstance();
-//
-//            databaseReference = FirebaseDatabase.getInstance().getReference();
-//            databaseReference.keepSynced(true);
-//
-//            getTeamFromDatabase(view);
-
-//            TextView userIdTxt = view.findViewById(R.id.user_id_textView);
-        //          userIdTxt.setText(utils.getStoredString(getActivity(), USER_ID));
-
-        //        view.findViewById(R.id.copy_btn_user_id).setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //      public void onClick(View view) {
-
-
-//                    ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-//                    ClipData clipData = ClipData.newPlainText("User ID", utils.getStoredString(getActivity(), USER_ID));
-//                    clipboardManager.setPrimaryClip(clipData);
-//
-//                    utils.showWorkDoneDialog(getActivity(), "Copied!", "Your referral ID has been copied to clipboard. Now tell others to sign up using your ID and after they upgrade their account, you'll get 15 premium ads and every ad will give you Rs: 5");
-        //          }
-        //    });
-
-//        }
-
-        utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getDate(getActivity()));
-
         viewPager = view.findViewById(R.id.view_pager_fragment_team);
         viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tablayout);
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#ffffff"));
+        tabLayout.setTabTextColors(Color.parseColor("#A9FFFFFF"), Color.parseColor("#ffffff"));
         tabLayout.setupWithViewPager(viewPager);
-
-
-        dateTextView = view.findViewById(R.id.current_date_textview);
-        dateTextView.setText("Today, (" + utils.getDate(getActivity()) + ")");
-
-        view.findViewById(R.id.date_picker_layout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                showDatePickerDialog(view, viewPagerAdapter);
-
-            }
-        });
 
         view.findViewById(R.id.add_referral_detail_btn_fragment_team).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,12 +120,6 @@ public class FragmentReferrals extends Fragment {
                     cityTv.requestFocus();
                     return;
                 }
-
-//                if (!isNmbrValid) {
-//                    numbereditText.setError("Number is invalid!");
-//                    numbereditText.requestFocus();
-//                    return;
-//                }
 
                 if (numbereditText.getText().toString().length() != 11) {
                     numbereditText.setError("Minimum length should be 11!");
@@ -273,7 +204,7 @@ public class FragmentReferrals extends Fragment {
         databaseReference
                 .child("referrals")
                 .child(mAuth.getCurrentUser().getUid())
-                .child(utils.getDate(getActivity()))
+//                .child(utils.getDate(getActivity()))
                 .push()
                 .setValue(details).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -281,7 +212,7 @@ public class FragmentReferrals extends Fragment {
                 if (task.isSuccessful()) {
                     dialog1.dismiss();
                     referralDialog.dismiss();
-                    updateCounter();
+                    //updateCounter(dialog1, referralDialog);
                     utils.showWorkDoneDialog(getActivity(), "Detail uploaded!", "Your referral detail is successfully submitted and you wil get a response feedback in approx 28 hours.");
                     updateViewPagerWithCurrentDate();
                 } else {
@@ -296,50 +227,8 @@ public class FragmentReferrals extends Fragment {
     }
 
     private void updateViewPagerWithCurrentDate() {
-        utils.storeString(getActivity(), CURRENT_DATE_STRING, utils.getDate(getActivity()));
+
         viewPager.setAdapter(viewPagerAdapter);
-        dateTextView.setText("Today, (" + utils.getDate(getActivity()) + ")");
-    }
-
-    private void updateCounter() {
-
-        databaseReference.child("referrals").child(mAuth.getCurrentUser().getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        if (!snapshot.exists())
-
-                        if (snapshot.hasChild("total_referrals")) {
-
-                            long counter = (long) snapshot.child("total_referrals").getValue();
-
-                            databaseReference
-                                    .child("referrals")
-                                    .child(mAuth.getCurrentUser().getUid())
-                                    .child("total_referrals")
-                                    .setValue(++counter);
-
-                        } else {
-
-                            long nmbr = 1;
-
-                            databaseReference
-                                    .child("referrals")
-                                    .child(mAuth.getCurrentUser().getUid())
-                                    .child("total_referrals")
-                                    .setValue(nmbr);
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.w(TAG, "onCancelled: total counter", error.toException());
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
     }
 
@@ -381,12 +270,12 @@ public class FragmentReferrals extends Fragment {
                     }
 
                 // THIRD CHARACTER OF THE NUMBER IS 6, 7, 8, 9 WHICH ARE INVALID
-                if (nmbr.length() >= 3){
+                if (nmbr.length() >= 3) {
                     if (nmbr.substring(0, 3).equals("036")
                             || nmbr.substring(0, 3).equals("037")
                             || nmbr.substring(0, 3).equals("038")
                             || nmbr.substring(0, 3).equals("039")
-                            ) {
+                    ) {
 
                         removeCharacter(phoneNmbrEditText);
                         Toast.makeText(getActivity(), "Number is invalid!", Toast.LENGTH_SHORT).show();
@@ -395,7 +284,7 @@ public class FragmentReferrals extends Fragment {
                         //return;
                     }
 
-            }
+                }
                 //isNmbrValid = true;
 
             }
@@ -408,7 +297,7 @@ public class FragmentReferrals extends Fragment {
 
     }
 
-    private void removeCharacter(EditText edittext){
+    private void removeCharacter(EditText edittext) {
 
         BaseInputConnection textFieldConnection = new BaseInputConnection(edittext, true);
         textFieldConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
@@ -478,72 +367,6 @@ public class FragmentReferrals extends Fragment {
                 default:
                     return null;
             }
-        }
-    }
-
-    private void showDatePickerDialog(View view, ViewPagerAdapter viewAdapter) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        DialogFragment dialogFragment = new DatePickerFragment(view, viewAdapter);
-        dialogFragment.show(fragmentManager, "datePicker");
-    }
-
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-        private static final String CURRENT_DATE_STRING = "current_date_string";
-        Utils utils = new Utils();
-        View parentView;
-        ViewPagerAdapter pagerAdapter;
-
-        public DatePickerFragment(View v, ViewPagerAdapter adapter) {
-            parentView = v;
-            pagerAdapter = adapter;
-        }
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-            //return super.onCreateDialog(savedInstanceState);
-
-            String currentDate = utils.getDate(getActivity());// 06-10-2020
-
-            int date = Integer.parseInt(currentDate.substring(0, 2));
-            int month = Integer.parseInt(currentDate.substring(3, 5));
-            int year = Integer.parseInt(currentDate.substring(6));
-
-            return new DatePickerDialog(getActivity(), this, year, month - 1, date);
-
-        }
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-            String y = String.valueOf(year);
-            String m = String.valueOf(month + 1);
-            String d = String.valueOf(dayOfMonth);
-
-            if (month + 1 < 10)
-                m = "0" + m;
-
-            if (dayOfMonth < 10)
-                d = "0" + d;
-
-            TextView dateTextView = parentView.findViewById(R.id.current_date_textview);
-
-            String currentDateStr = d + "-" + m + "-" + y;
-
-            if (currentDateStr.equals(utils.getPreviousDate(getActivity())))
-                dateTextView.setText("Yesterday, (" + currentDateStr + ")");
-
-            else if (currentDateStr.equals(utils.getDate(getActivity())))
-                dateTextView.setText("Today, (" + currentDateStr + ")");
-
-            else dateTextView.setText(currentDateStr);
-
-            utils.storeString(getActivity(), CURRENT_DATE_STRING, currentDateStr);
-
-            ViewPager viewPager = parentView.findViewById(R.id.view_pager_fragment_team);
-            viewPager.setAdapter(pagerAdapter);
-
         }
     }
 

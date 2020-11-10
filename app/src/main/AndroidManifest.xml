@@ -2,16 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.moutamid.earnreal">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- ADMIN CODE STARTED -->
+<!--    <uses-permission android:name="android.permission.SEND_SMS" />-->
+<!--    <uses-permission android:name="android.permission.CALL_PHONE" />-->
 
     <application
+        android:name=".ContextEarnReal"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name=".ContextEarnReal"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        <activity android:name=".AdminActivityApproveReferrals"></activity>-->
+        <!-- ADMIN CODE STARTED -->
+<!--        <activity android:name=".AdminCreateSignUpUserActivity" /> &lt;!&ndash; ADMIN CODE ENDED &ndash;&gt;-->
         <activity
             android:name=".MainActivity"
             android:label="EarnReal">
@@ -21,9 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityWelcome"/>
+        <activity android:name=".ActivityWelcome" />
         <activity android:name=".ActivityLogin" />
-
     </application>
 
 </manifest>

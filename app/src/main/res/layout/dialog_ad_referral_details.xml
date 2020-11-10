@@ -3,7 +3,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_background"
+    android:background="@drawable/bg_dialog"
     android:orientation="vertical">
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/bg_edit_text"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -85,7 +85,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/bg_edit_text"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -122,7 +122,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/edit_text_background"
+        android:background="@drawable/bg_edit_text"
         android:orientation="horizontal"
         android:padding="5dp">
 

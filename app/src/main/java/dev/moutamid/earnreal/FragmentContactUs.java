@@ -15,4 +15,5 @@ public class FragmentContactUs extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_contact_us_layout,container,false);
     }
+    // TODO: UN-HIDE THIS FRAGMENT FROM MENU XML
 }

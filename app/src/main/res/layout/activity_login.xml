@@ -28,7 +28,7 @@
             android:id="@+id/userNameLoginLayout"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_background"
+            android:background="@drawable/bg_edit_text"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -51,7 +51,6 @@
                 android:inputType="number"
                 android:textColor="@color/darkBlue"
                 android:textColorHint="@color/greyishblue"
-                android:textCursorDrawable="@color/skyBlue"
                 android:textSize="13sp" />
 
         </LinearLayout>
@@ -61,7 +60,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:background="@drawable/edit_text_background"
+            android:background="@drawable/bg_edit_text"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -81,10 +80,9 @@
                 android:layout_marginEnd="5dp"
                 android:background="@color/white"
                 android:hint="Password"
-                android:inputType="textPassword"
+                android:inputType="textPersonName"
                 android:textColor="@color/darkBlue"
                 android:textColorHint="@color/greyishblue"
-                android:textCursorDrawable="@color/skyBlue"
                 android:textSize="13sp" />
 
         </LinearLayout>

@@ -13,24 +13,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.krishna.securetimer.SecureTimer;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
-
 public class Utils {
 
-    private static final String USER_EMAIL = "userEmail";
-    private static final String USER_ID = "userReferralCode";
-    private static final String USER_GENDER = "userGender";
-    private static final String USER_NUMBER = "userNumber";
-    private static final String REFERRED_BY = "referredBy";
+//    private static final String USER_EMAIL = "userEmail";
+//    private static final String USER_ID = "userReferralCode";
+//    private static final String USER_GENDER = "userGender";
+//    private static final String USER_NUMBER = "userNumber";
+//    private static final String REFERRED_BY = "referredBy";
     private static final String PACKAGE_NAME = "dev.moutamid.earnreal";
-    private static final String PAID_STATUS = "paidStatus";
+//    private static final String PAID_STATUS = "paidStatus";
 
     private SharedPreferences sharedPreferences;
 
@@ -44,39 +35,39 @@ public class Utils {
         sharedPreferences.edit().putString(name, object).apply();
     }
 
-    public void storeBoolean(Context context1, String name, boolean value) {
-        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean(name, value).apply();
-    }
-
-    public boolean getStoredBoolean(Context context1, String name) {
-        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean(name, false);
-    }
-
-    public void storeInteger(Context context1, String name, int value) {
-        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putInt(name, value).apply();
-    }
-
-    public int getStoredInteger(Context context1, String name) {
-        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(name, 0);
-    }
-
-    public void storeFloat(Context context1, String name, float value) {
-        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-        sharedPreferences.edit().putFloat(name, value).apply();
-    }
-
-    public float getStoredFloat(Context context1, String name) {
-        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getFloat(name, 0);
-    }
-
-    public String getRandomNmbr(int length) {
-        return String.valueOf(new Random().nextInt(length) + 1);
-    }
+//    public void storeBoolean(Context context1, String name, boolean value) {
+//        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+//        sharedPreferences.edit().putBoolean(name, value).apply();
+//    }
+//
+//    public boolean getStoredBoolean(Context context1, String name) {
+//        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+//        return sharedPreferences.getBoolean(name, false);
+//    }
+//
+//    public void storeInteger(Context context1, String name, int value) {
+//        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+//        sharedPreferences.edit().putInt(name, value).apply();
+//    }
+//
+//    public int getStoredInteger(Context context1, String name) {
+//        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+//        return sharedPreferences.getInt(name, 0);
+//    }
+//
+//    public void storeFloat(Context context1, String name, float value) {
+//        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+//        sharedPreferences.edit().putFloat(name, value).apply();
+//    }
+//
+//    public float getStoredFloat(Context context1, String name) {
+//        sharedPreferences = context1.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+//        return sharedPreferences.getFloat(name, 0);
+//    }
+//
+//    public String getRandomNmbr(int length) {
+//        return String.valueOf(new Random().nextInt(length) + 1);
+//    }
 
     public void showOfflineDialog(Context context, String title, String desc) {
 
@@ -134,61 +125,6 @@ public class Utils {
 
     }
 
-    public String getDate(Context context) {
-
-        try {
-
-            Date date = SecureTimer.with(context).getCurrentDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            return sdf.format(date);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "Error";
-
-    }
-
-    public String getNextDate(Context context) {
-
-        try {
-            Date date = SecureTimer.with(context).getCurrentDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-            Calendar c = Calendar.getInstance();
-
-            c.setTime(sdf.parse(sdf.format(date)));
-            c.add(Calendar.DATE, 1);
-            return sdf.format(c.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return "Error";
-    }
-
-    public String getPreviousDate(Context context) {
-
-        try {
-            Date date = SecureTimer.with(context).getCurrentDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-            Calendar c = Calendar.getInstance();
-
-            c.setTime(sdf.parse(sdf.format(date)));
-            c.add(Calendar.DATE, -1);
-            return sdf.format(c.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return "Error";
-    }
-
-    public void showSnackBar(View view, String msg) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
     public void showDialog(Context context, String title, String message, String positiveBtnName, String negativeBtnName, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener, boolean cancellable) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
@@ -196,7 +132,6 @@ public class Utils {
                 .setPositiveButton(positiveBtnName, positiveListener)
                 .setNegativeButton(negativeBtnName, negativeListener)
                 .setCancelable(cancellable)
-                .show()
-                .getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.darkPink));
+                .show();
     }
 }

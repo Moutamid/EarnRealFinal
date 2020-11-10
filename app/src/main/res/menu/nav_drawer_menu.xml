@@ -7,18 +7,6 @@
             android:id="@+id/nav_dashboard_id"
             android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
-<!--        <item-->
-<!--            android:id="@+id/nav_upgrade_id"-->
-<!--            android:icon="@drawable/ic_upgrade"-->
-<!--            android:title="Upgrade" />-->
-<!--        <item-->
-<!--            android:id="@+id/nav_premium_ads_id"-->
-<!--            android:icon="@drawable/ic_premium_ads"-->
-<!--            android:title="Premium Ads" />-->
-<!--        <item-->
-<!--            android:id="@+id/nav_daily_ads_id"-->
-<!--            android:icon="@drawable/ic_daily_ads"-->
-<!--            android:title="Daily Ads" />-->
         <item
             android:id="@+id/nav_referrals_id"
             android:title="Referral details"
@@ -44,10 +32,10 @@
                 android:id="@+id/nav_terms_of_services_id"
                 android:icon="@drawable/ic_terms_of_services"
                 android:title="Terms of services" />
-            <item
-                android:id="@+id/nav_contact_us_id"
-                android:title="Contact us"
-                android:icon="@drawable/ic_contact" />
+<!--            <item-->
+<!--                android:id="@+id/nav_contact_us_id"-->
+<!--                android:title="Contact us"-->
+<!--                android:icon="@drawable/ic_contact" />-->
 <!--            <item-->
 <!--                android:id="@+id/nav_help_id"-->
 <!--                android:title="Help"-->

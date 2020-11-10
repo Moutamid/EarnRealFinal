@@ -18,11 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class ActivityLogin extends AppCompatActivity {
     private static final String TAG = "ActivityLogin";
@@ -36,7 +31,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     private ProgressDialog mLoadingDialog;
 
-    private Boolean isOnline = false;
+//    private Boolean isOnline = false;
 
     private FirebaseAuth mAuth;
 //    private DatabaseReference databaseReference;
@@ -56,7 +51,7 @@ public class ActivityLogin extends AppCompatActivity {
 //        databaseReference.keepSynced(true);
 
         // CHECKING ONLINE STATUS
-        checkOnlineStatus();
+        //checkOnlineStatus();
 
         mLoadingDialog = new ProgressDialog(this);
         mLoadingDialog.setCancelable(false);
@@ -80,25 +75,25 @@ public class ActivityLogin extends AppCompatActivity {
         }
     }
 
-    private void checkOnlineStatus() {
-        Log.i(TAG, "checkOnlineStatus: ");
-
-        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
-        connectedRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i(TAG, "onDataChange: online status");
-
-                isOnline = snapshot.getValue(Boolean.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w(TAG, "onCancelled: " + error.getMessage());
-            }
-        });
-
-    }
+//    private void checkOnlineStatus() {
+//        Log.i(TAG, "checkOnlineStatus: ");
+//
+//        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+//        connectedRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Log.i(TAG, "onDataChange: online status");
+//
+//                isOnline = snapshot.getValue(Boolean.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.w(TAG, "onCancelled: " + error.getMessage());
+//            }
+//        });
+//
+//    }
 
     private View.OnClickListener loginBtnListener() {
         Log.i(TAG, "loginBtnListener: ");
@@ -107,12 +102,12 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i(TAG, "onClick: login button");
 
-                if (isOnline) {
+                //if (isOnline) {
                     mLoadingDialog.show();
                     checkStatusOfEditTexts();
-                } else {
-                    utils.showOfflineDialog(ActivityLogin.this, "", "");
-                }
+//                } else {
+//                    utils.showOfflineDialog(ActivityLogin.this, "", "");
+//                }
             }
         };
     }
@@ -122,13 +117,13 @@ public class ActivityLogin extends AppCompatActivity {
 
         String emailStr = emailEditText.getText().toString().trim();
 
-        String passwordStr = passwordEditText.getText().toString().trim();
+        String passwordStr = passwordEditText.getText().toString().trim().toLowerCase();
 
-        if (!isOnline) {
-            mLoadingDialog.dismiss();
-            utils.showOfflineDialog(ActivityLogin.this, "", "");
-            return;
-        }
+//        if (!isOnline) {
+//            mLoadingDialog.dismiss();
+//            utils.showOfflineDialog(ActivityLogin.this, "", "");
+//            return;
+//        }
 
         if (TextUtils.isEmpty(emailStr)) {
             mLoadingDialog.dismiss();

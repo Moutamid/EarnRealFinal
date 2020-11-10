@@ -8,29 +8,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:orientation="vertical"
         android:paddingTop="20dp"
-        android:paddingBottom="40dp"
-        android:orientation="vertical">
+        android:paddingBottom="40dp">
 
         <LinearLayout
             android:id="@+id/current_balance_layout_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:background="@drawable/bg_dashboard_item_1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Current balance"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -38,17 +38,17 @@
                     android:layout_height="wrap_content"
                     android:text="Rs : "
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/current_balance_tv_dashboard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loading..."
-                    android:id="@+id/current_balance_tv_dashboard"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -58,22 +58,22 @@
             android:id="@+id/total_withdraw_layout_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_dashboard_item_2"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total withdraw"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -81,17 +81,17 @@
                     android:layout_height="wrap_content"
                     android:text="Rs : "
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/total_withdraw_tv_dashboard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loading..."
-                    android:id="@+id/total_withdraw_tv_dashboard"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -101,27 +101,27 @@
             android:id="@+id/paid_referrals_layout_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_dashboard_item_3"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Paid referrals"
+                android:text="Paid referrals (this month)"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/paid_members_tv_dashboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Loading..."
                 android:textColor="@color/white"
-                android:id="@+id/paid_members_tv_dashboard"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -129,50 +129,50 @@
             android:id="@+id/total_referrals_submitted_layout_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_dashboard_item_5"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total referrals submitted"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/total_referrals_tv_dashboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Loading..."
-                android:id="@+id/total_referrals_tv_dashboard"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:textSize="20sp"/>
+                android:text="Loading..."
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/total_balance_layout_dashboard"
             android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bg_dashboard_item_4"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total balance earned"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -180,17 +180,17 @@
                     android:layout_height="wrap_content"
                     android:text="Rs : "
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/total_balance_tv_dashboard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loading..."
-                    android:id="@+id/total_balance_tv_dashboard"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -199,45 +199,30 @@
         <LinearLayout
             android:id="@+id/account_status_layout_dashboard"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_dashboard_item_6"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Account Status"
                 android:textColor="@color/white"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/account_status_level_tv_dashboard"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:text="Loading..."
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Loading..."
-                    android:textColor="@color/white"
-                    android:id="@+id/account_status_tv_dashboard"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="02/06/20"
-                    android:visibility="gone"
-                    android:id="@+id/paid_status_date_tv_dashboard"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 
